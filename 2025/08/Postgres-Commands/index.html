@@ -123,7 +123,7 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="https://matt23-star.github.io/2024/03/how-to-use-usc-carc/"/>
+    <link rel="canonical" href="https://matt23-star.github.io/2025/08/postgres-commands/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
@@ -133,16 +133,15 @@
         
         <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="How to use USC CARC">
-<meta property="og:url" content="https://matt23-star.github.io/2024/03/How-to-use-USC-CARC/index.html">
+<meta property="og:title" content="Postgres Commands">
+<meta property="og:url" content="https://matt23-star.github.io/2025/08/Postgres-Commands/index.html">
 <meta property="og:site_name" content="Hello World!">
 <meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://matt23-star.github.io/images/redefine-og.webp">
-<meta property="article:published_time" content="2024-03-26T16:23:43.000Z">
-<meta property="article:modified_time" content="2025-07-21T13:44:29.287Z">
+<meta property="article:published_time" content="2025-08-14T14:37:01.000Z">
+<meta property="article:modified_time" content="2025-08-14T15:38:02.000Z">
 <meta property="article:author" content="Hao Feng">
-<meta property="article:tag" content="CARC">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://matt23-star.github.io/images/redefine-og.webp">
     
@@ -156,7 +155,7 @@
     
     <title>
         
-            How to use USC CARC | Matt&#39;s Journey Notes
+            Postgres Commands | Matt&#39;s Journey Notes
         
     </title>
 
@@ -533,12 +532,8 @@
 
 		<div class="article-title relative w-full">
 			
-			
-			
-			<img src="https://raw.githubusercontent.com/Matt23-star/images/main/202403270028613.png" alt="How to use USC CARC" class="w-full h-60 sm:h-72 md:h-80 object-cover sm:rounded-t-large dark:brightness-75" />
-			
-			<div class="w-full flex items-center absolute bottom-0 justify-start">
-				<h1 class="article-title-cover text-center mx-6 my-6 text-second-text-color bg-background-color-transparent px-4 py-3 text-3xl sm:text-4xl md:text-5xl font-semibold backdrop-blur-lg rounded-xl border border-border-color ">How to use USC CARC</h1>
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">Postgres Commands</h1>
 			</div>
 			
 		</div>
@@ -559,47 +554,20 @@
 					<div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2024-03-27 00:23:43</span>
-        <span class="mobile">2024-03-27 00:23:43</span>
+        <span class="desktop">2025-08-14 22:37:01</span>
+        <span class="mobile">2025-08-14 22:37:01</span>
         <span class="hover-info">Created</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-07-21 21:44:29</span>
-            <span class="mobile">2025-07-21 21:44:29</span>
+            <span class="desktop">2025-08-14 23:38:02</span>
+            <span class="mobile">2025-08-14 23:38:02</span>
             <span class="hover-info">Updated</span>
         </span>
     
 
     
-        <span class="article-categories article-meta-item">
-            <i class="fa-regular fa-folders"></i>&nbsp;
-            <ul>
-                
-                
-                    
-                        
-                        <li>
-                            <a href="/categories/Dragons/">Dragons</a>&nbsp;
-                        </li>
-                    
-                    
-                
-            </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fa-regular fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/CARC/">CARC</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
     
 
     
@@ -621,210 +589,22 @@
 
 
 		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-			<h1 id="How-to-use-CARC"><a href="#How-to-use-CARC" class="headerlink" title="How to use CARC"></a>How to use CARC</h1><blockquote>
-<p>CentOS Linux</p>
-</blockquote>
-<h2 id="CARC-OnDemand"><a href="#CARC-OnDemand" class="headerlink" title="CARC OnDemand"></a>CARC OnDemand</h2><blockquote>
-<p>Online access point</p>
-</blockquote>
-<blockquote>
-<p>file management</p>
-<p>Command line shell access</p>
-<p>Slurm job management</p>
-<p>Access Jupyter</p>
-</blockquote>
-<h4 id="Jupyter"><a href="#Jupyter" class="headerlink" title="Jupyter"></a>Jupyter</h4><blockquote>
-<p>We can code in Jupyter interactive app</p>
-</blockquote>
-<p><strong>Install Jupyter kernel in Conda</strong></p>
-<p>Once installed, when launching Jupyter on OnDemand, the kernels will show up on a Launcher tab (File &gt; New Launcher) and when selecting kernels through other methods.</p>
-<div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">module purge</span><br><span class="line">conda activate &lt;env_name&gt;</span><br><span class="line">mamba install -c conda-forge ipykernel</span><br><span class="line">python -m ipykernel install --user --name &lt;env_name&gt; --display-name &quot;Display_name&quot;</span><br></pre></td></tr></table></figure></div>
+			<h1 id="PostgreSQL-常见命令-查询语句"><a href="#PostgreSQL-常见命令-查询语句" class="headerlink" title="PostgreSQL 常见命令&#x2F;查询语句"></a>PostgreSQL 常见命令&#x2F;查询语句</h1><h2 id="数据库连接"><a href="#数据库连接" class="headerlink" title="数据库连接"></a>数据库连接</h2><h3 id="在服务器或本机下载PostgreSQL客户端"><a href="#在服务器或本机下载PostgreSQL客户端" class="headerlink" title="在服务器或本机下载PostgreSQL客户端"></a>在服务器或本机下载PostgreSQL客户端</h3><div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line"># 先添加 PG 官方 YUM 源</span><br><span class="line">sudo yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-$(rpm -E %&#123;rhel&#125;)-x86_64/pgdg-redhat-repo-latest.noarch.rpm</span><br><span class="line"># 再安装客户端</span><br><span class="line">sudo yum install -y postgresql13</span><br></pre></td></tr></table></figure></div>
 
-<p><strong>Start Jupyter interactive app</strong></p>
-<p>To start an interactive session in OnDemand, select the application you want to use from the Interactive App dropdown menu at the top of the OnDemand dashboard. </p>
-<p>Once selecting an application, the session creation page appears. Then customize interactive session using the form fields.</p>
-<p>Click <strong>Launch</strong> to launch session. Then this will schedule session in the Slurm queue. On the My Interactive Sessions page, your session will be highlighted in blue with a status of “Starting” or “Queued”.</p>
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://raw.githubusercontent.com/Matt23-star/images/main/202403280108992.png"
-                      style="some = 70%" 
-                >
+<h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">psql -h &lt;host&gt; -p &lt;<span class="number">5432</span>(默认端口)&gt; -U &lt;user_id&gt; -d &lt;database_name&gt;</span><br></pre></td></tr></table></figure></div>
 
-<p>Then click <strong>Connect to JupyterLab</strong> to interactive page. Then enjoy!</p>
-<h2 id="How-to-connect-via-SSH"><a href="#How-to-connect-via-SSH" class="headerlink" title="How to connect via SSH"></a>How to connect via SSH</h2><h3 id="Connect-to-the-USC-network-or-Research-VPN"><a href="#Connect-to-the-USC-network-or-Research-VPN" class="headerlink" title="Connect to the USC network or Research VPN"></a>Connect to the USC network or Research VPN</h3><p>We can download software <a class="link"   target="_blank" rel="noopener" href="https://vpn.usc.edu/" >here<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>. </p>
-<p>click <strong>Start AnyConnect</strong> in <strong>AnyConenct</strong> page to download and install.</p>
-<p>Then connect VPN via <code>vpn.usc.edu</code></p>
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://raw.githubusercontent.com/Matt23-star/images/main/202403270103755.png"
-                      style="zoom:60%"
-                >
+<p>输入密码即可</p>
+<h2 id="库与表操作"><a href="#库与表操作" class="headerlink" title="库与表操作"></a>库与表操作</h2><h3 id="查看所有表的大小"><a href="#查看所有表的大小" class="headerlink" title="查看所有表的大小"></a>查看所有表的大小</h3><div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">SELECT</span><br><span class="line">  n.nspname        AS schema,</span><br><span class="line">  c.relname        AS table_name,</span><br><span class="line">  pg_size_pretty(pg_total_relation_size(c.oid)) AS total_size,</span><br><span class="line">  pg_total_relation_size(c.oid)                 AS total_size_bytes</span><br><span class="line">FROM pg_class c</span><br><span class="line">JOIN pg_namespace n ON n.oid = c.relnamespace</span><br><span class="line">WHERE c.relkind = &#x27;r&#x27;      -- 只统计普通表</span><br><span class="line">  AND n.nspname <span class="keyword">NOT</span> <span class="keyword">IN</span> (&#x27;pg_catalog&#x27;,&#x27;information_schema&#x27;)</span><br><span class="line">ORDER BY pg_total_relation_size(c.oid) DESC;</span><br></pre></td></tr></table></figure></div>
 
-<h3 id="Logging-in"><a href="#Logging-in" class="headerlink" title="Logging in"></a>Logging in</h3><p>We need open a new terminal window and enter</p>
-<div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">ssh &lt;username&gt;@discovery.usc.edu</span><br></pre></td></tr></table></figure></div>
+<h3 id="查看所有索引的情况（大小，使用次数）"><a href="#查看所有索引的情况（大小，使用次数）" class="headerlink" title="查看所有索引的情况（大小，使用次数）"></a>查看所有索引的情况（大小，使用次数）</h3><div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">SELECT</span><br><span class="line">    s.schemaname,</span><br><span class="line">    s.relname AS table_name,</span><br><span class="line">    s.indexrelname AS index_name,</span><br><span class="line">    s.idx_scan AS times_used,         -- 索引扫描次数</span><br><span class="line">    s.idx_tup_read AS tuples_read,    -- 通过索引读取到的元组</span><br><span class="line">    s.idx_tup_fetch AS tuples_fetched,-- 通过索引返回的元组</span><br><span class="line">    pg_size_pretty(pg_relation_size(s.indexrelid)) AS index_size</span><br><span class="line">FROM pg_stat_all_indexes s</span><br><span class="line">JOIN pg_indexes i</span><br><span class="line">  ON s.schemaname = i.schemaname</span><br><span class="line"> AND s.indexrelname = i.indexname</span><br><span class="line">WHERE s.schemaname <span class="keyword">NOT</span> <span class="keyword">IN</span> (&#x27;pg_catalog&#x27;, &#x27;information_schema&#x27;)</span><br><span class="line">ORDER BY index_size DESC;</span><br></pre></td></tr></table></figure></div>
 
-<blockquote>
-<p>Make sure to substitute USC NetID as the username. After entering this command, input NetID password.</p>
-</blockquote>
-<p>We can also use SSH client, like Xshell, to manage our connects. And We can also use extensions on Visual Studio including Remote - SSH, SSH FS, etc.</p>
-<p>After that, we can access our files.</p>
-<h3 id="Files"><a href="#Files" class="headerlink" title="Files"></a>Files</h3><h4 id="File-storage"><a href="#File-storage" class="headerlink" title="File storage"></a>File storage</h4><table>
-<thead>
-<tr>
-<th>File system</th>
-<th>Description</th>
-<th>Recoomended storage</th>
-<th>Activities</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&#x2F;home1&#x2F;&lt;username&gt;</td>
-<td>Each CARC user has a home directory with 100 GB of disk space.<br />Use <code>cd</code> to quickly change to</td>
-<td>Personal files, configuration files</td>
-<td>Create and edit personal scripts&#x2F;programs</td>
-</tr>
-<tr>
-<td>&#x2F;project&#x2F;&lt;PI_username&gt;_&lt;id&gt;</td>
-<td>This file system is a high-performance, parallel file system consisting of shared directories for different research project groups.</td>
-<td>shared files, software installations, job scripts and files, I&#x2F;O files</td>
-<td>creating and editing scripts&#x2F;programs, compiling, I&#x2F;O, transferring data</td>
-</tr>
-<tr>
-<td>&#x2F;scratch1&#x2F;&lt;username&gt;<br />&#x2F;scratch2&#x2F;&lt;username&gt;</td>
-<td>These file systems are high-performance, parallel file systems.<br /><u>files stored here should be periodically backed up to decrease the risk of data loss.</u><br />Use <code>cds</code> and <code>cds2</code> to quickly change to</td>
-<td>temporary files and I&#x2F;O operations.</td>
-<td>I&#x2F;O, testing</td>
-</tr>
-</tbody></table>
-<h4 id="Transferring-files"><a href="#Transferring-files" class="headerlink" title="Transferring files"></a>Transferring files</h4><p>CARC has two dedicated data transfer nodes at <code>hpc-transfer1.usc.edu</code>and <code>hpc-transfer2.usc.edu</code>that are configured for fast file transfers. </p>
-<div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">ssh &lt;username&gt;@hpc-transfer1.usc.edu</span><br></pre></td></tr></table></figure></div>
+<h3 id="查看单个表的基本情况"><a href="#查看单个表的基本情况" class="headerlink" title="查看单个表的基本情况"></a>查看单个表的基本情况</h3><div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">\d &lt;table_name&gt;</span><br></pre></td></tr></table></figure></div>
 
-<blockquote>
-<p>We can also use <strong>OnDemand</strong> for uploading&#x2F;downloading relatively small files.</p>
-</blockquote>
-<p>**Transfer between local and Discovery: ** commands like <code>sftp</code> or <code>rsync</code></p>
-<div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">scp file &lt;user_name&gt;@hpc-transfer1.usc.edu:/home1/&lt;usr_name&gt;</span><br></pre></td></tr></table></figure></div>
-
-<p>**Transfer between Internet and Discovery: ** commands like <code>wget</code>, <code>curl</code> or <code>aria2c</code>, And <strong>Git</strong> commands.</p>
-<p>If you install <strong>tmux</strong> module</p>
-<blockquote>
-<p>A tmux process is unique to a node, so if you’re using tmux on a login node, make sure to always log in to the same login node if you want to reattach to previous tmux sessions. </p>
-<p>**Initiate seesion: **<code>tmux</code></p>
-<p>**Check progress: **<code>tmux attach</code> </p>
-</blockquote>
-<h4 id="Edit-files"><a href="#Edit-files" class="headerlink" title="Edit files"></a>Edit files</h4><p>Work in Visual Studio</p>
-<p>Or use the <code>nano</code>, <code>micro</code>,<code>vim</code>, or <code>emacs</code>text editors.</p>
-<h3 id="Install-and-Run-software"><a href="#Install-and-Run-software" class="headerlink" title="Install and Run software"></a>Install and Run software</h3><p>On Discovery, CARC maintains software, compilers, and libraries using the <code>module</code>system. </p>
-<p>To see the available softwares</p>
-<div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">module avail</span><br></pre></td></tr></table></figure></div>
-
-<p>If knowing the name of a software package, we can use the <code>module spider</code>command to find out if it is available and how to load it.</p>
-<div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">module spider &lt;name&gt;</span><br></pre></td></tr></table></figure></div>
-
-<p>To load software without any further installations.</p>
-<div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">module load &lt;software_name&gt;</span><br></pre></td></tr></table></figure></div>
+<h3 id="查看单个表的表数据大小-索引大小-TOAST-大小"><a href="#查看单个表的表数据大小-索引大小-TOAST-大小" class="headerlink" title="查看单个表的表数据大小 + 索引大小 + TOAST 大小"></a>查看单个表的表数据大小 + 索引大小 + TOAST 大小</h3><div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">SELECT</span><br><span class="line">    relname AS table_name,</span><br><span class="line">    pg_size_pretty(pg_total_relation_size(relid)) AS total_size,</span><br><span class="line">    pg_size_pretty(pg_relation_size(relid)) AS data_size,</span><br><span class="line">    pg_size_pretty(pg_total_relation_size(relid) - pg_relation_size(relid) - COALESCE(pg_toast_size(relid), <span class="number">0</span>)) AS indexes_size,</span><br><span class="line">    pg_size_pretty(COALESCE(pg_toast_size(relid), <span class="number">0</span>)) AS toast_size</span><br><span class="line">FROM pg_catalog.pg_statio_user_tables</span><br><span class="line">WHERE relname = &#x27;你的表名&#x27;;</span><br></pre></td></tr></table></figure></div>
 
 
 
-<h3 id="Install-module-with-Conda-mamba"><a href="#Install-module-with-Conda-mamba" class="headerlink" title="Install module with Conda &#x2F; mamba"></a>Install module with Conda &#x2F; mamba</h3><blockquote>
-<p><strong>Conda</strong> is a package management system which can be used to create Python and R development environments on many different platforms. <strong>Mamba</strong> is a drop-in replacement for Conda that is generally faster and better at resolving dependencies.</p>
-<p>It’s common that installing packages using Conda is slow or fails because Conda is unable to resolve dependencies. To get around this, <strong>Mamba</strong> is better.</p>
-</blockquote>
-<p>Check packages list in the current environment </p>
-<div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">conda list</span><br></pre></td></tr></table></figure></div>
-
-<p>check environment</p>
-<div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">conda env list</span><br></pre></td></tr></table></figure></div>
-
-<p>activate environment</p>
-<div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">conda activate -n &lt;env_name&gt;</span><br></pre></td></tr></table></figure></div>
-
-<p>install modules</p>
-<div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">conda search &lt;module_name&gt;</span><br><span class="line">conda install &lt;module_name&gt;=&lt;version&gt;</span><br></pre></td></tr></table></figure></div>
-
-
-
-<h3 id="Jobs"><a href="#Jobs" class="headerlink" title="Jobs"></a>Jobs</h3><p>Discovery computing cluster is a shared system, we use a job scheduler <strong><u>Slurm</u></strong> to manage all requests for resources. The <strong><u>Slurm</u></strong> (Simple Linux Utility for Resource Management) job scheduler is an open-source job scheduler that allocates compute resources on clusters for queued, user-defined jobs. </p>
-<p>Use the <code>myaccount</code>command to see your available and default accounts and usage for each account.</p>
-<h4 id="Test-jobs-interactive-mode"><a href="#Test-jobs-interactive-mode" class="headerlink" title="Test jobs (interactive mode)"></a>Test jobs (interactive mode)</h4><blockquote>
-<p>First perform some basic tests of your job interactively on a compute node before submitting it as a batch job to the Slurm job scheduler, ensuring that you will have quality results after the job completes. </p>
-</blockquote>
-<p>Use Slurm’s <code>salloc</code> command to reserver resources on a node.</p>
-<p>For example, to request 8 CPU and 16GB of memory for 2 hours, enter:</p>
-<div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">salloc --<span class="built_in">time</span>=<span class="number">2</span>:<span class="number">00</span>:<span class="number">00</span> --cpus-per-task=<span class="number">8</span> --mem=<span class="number">16</span>GB --account=&lt;project_ID&gt;</span><br><span class="line">salloc --<span class="built_in">time</span>=<span class="number">5</span>:<span class="number">00</span>:<span class="number">00</span> --partition=gpu --gpus=<span class="number">4</span> --mem=<span class="number">16</span>GB --account=ruishanl_1185</span><br></pre></td></tr></table></figure></div>
-
-<p>Then test by loading the software environment <code>module load xxx</code>and running scripts or programs <code>python script.py</code>. Without the <code>--account</code>option, the default account will be used. This is fine if we only have one project account. </p>
-<h4 id="Running-conda"><a href="#Running-conda" class="headerlink" title="*Running conda"></a>*Running conda</h4><div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">module purge</span><br><span class="line">mamba activate &lt;env_name&gt;</span><br></pre></td></tr></table></figure></div>
-
-<h4 id="Exit-interactive-mode"><a href="#Exit-interactive-mode" class="headerlink" title="Exit interactive mode"></a>Exit interactive mode</h4><p>enter <code>exit</code>in the shell. This will return to the login node.</p>
-<h4 id="Submit-jobs-Batch-mode"><a href="#Submit-jobs-Batch-mode" class="headerlink" title="Submit jobs (Batch mode)"></a>Submit jobs (Batch mode)</h4><p>Create job script <code>&lt;job_name&gt;.job</code></p>
-<p>The top few lines of the file (that begin with <code>#SBATCH</code>) specify the requested resources for your program and other options. Make sure to use the correct account in your job scripts. Example:</p>
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://raw.githubusercontent.com/Matt23-star/images/main/202403271425243.png"
-                      style="zoom:70%"
-                >
-
-<table>
-<thead>
-<tr>
-<th>Command or Slurm argument</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>#!/bin/bash</code></td>
-<td>Use Bash to execute this script</td>
-</tr>
-<tr>
-<td><code>#SBATCH</code></td>
-<td>Syntax that allows Slurm to read your requests (ignored by Bash)</td>
-</tr>
-<tr>
-<td><code>--account=&lt;project_id&gt;</code></td>
-<td>Charge compute resources used to <project_id>; enter <code>myaccount</code>to view your available project IDs</td>
-</tr>
-<tr>
-<td><code>--partition=main</code></td>
-<td>Submit job to the main partition</td>
-</tr>
-<tr>
-<td><code>--nodes=1</code></td>
-<td>Use 1 compute node</td>
-</tr>
-<tr>
-<td><code>--ntasks=1</code></td>
-<td>Run 1 task (e.g., running a Python script)</td>
-</tr>
-<tr>
-<td><code>--cpus-per-task=8</code></td>
-<td>Reserve 8 CPUs for your exclusive use</td>
-</tr>
-<tr>
-<td><code>--mem=16G</code></td>
-<td>Reserve 16 GB of memory for your exclusive use</td>
-</tr>
-<tr>
-<td><code>--time=1:00:00</code></td>
-<td>Reserve resources described for 1 hour</td>
-</tr>
-</tbody></table>
-<p>To submit a batch job, use the <code>sbatch</code>command. For example:</p>
-<div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">sbatch &lt;job_name&gt;.job</span><br></pre></td></tr></table></figure></div>
-
-<p>Submitted jobs are processed remotely. The process is recorded and written to an output file in the same directory where you submitted the job from. By default, this output file is named <code>slurm-&lt;jobid&gt;.out</code>.</p>
-<h4 id="Running-conda-in-Batch-Mode"><a href="#Running-conda-in-Batch-Mode" class="headerlink" title="*Running conda in Batch Mode"></a>*Running conda in Batch Mode</h4><p>Create an application script. Then create a Slurm job script that runs the application script. Finally, Submit the job script to the job scheduler using <code>sbatch</code>.</p>
-<div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#SBATCH --account=&lt;project_id&gt;</span><br><span class="line">#SBATCH --partition=main</span><br><span class="line">#SBATCH --nodes=<span class="number">1</span></span><br><span class="line">#SBATCH --ntasks=<span class="number">1</span></span><br><span class="line">#SBATCH --cpus-per-task=<span class="number">8</span></span><br><span class="line">#SBATCH --mem=<span class="number">16</span>G</span><br><span class="line">#SBATCH --<span class="built_in">time</span>=<span class="number">1</span>:<span class="number">00</span>:<span class="number">00</span></span><br><span class="line">module purge</span><br><span class="line">eval &quot;$(conda shell.bash hook)&quot;</span><br><span class="line">conda activate myenv</span><br><span class="line">python script.py</span><br></pre></td></tr></table></figure></div>
-
-<h4 id="Monitor-jobs"><a href="#Monitor-jobs" class="headerlink" title="Monitor jobs"></a>Monitor jobs</h4><p>Use the <code>squeue</code>command to view the status of jobs</p>
-<div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">squeue --me</span><br></pre></td></tr></table></figure></div>
-
-<h4 id="Cancel-jobs"><a href="#Cancel-jobs" class="headerlink" title="Cancel jobs"></a>Cancel jobs</h4><div class="code-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">scancel &lt;job_ID&gt;</span><br></pre></td></tr></table></figure></div>
-
-<p>The job may remain in the queue for a short time, but its status will change to “CG” (completing) or “CA” (canceled).</p>
+<h2 id="回收空洞-解决空间膨胀问题"><a href="#回收空洞-解决空间膨胀问题" class="headerlink" title="回收空洞&#x2F; 解决空间膨胀问题"></a>回收空洞&#x2F; 解决空间膨胀问题</h2><p><a href="">link</a></p>
 
 		</div>
 
@@ -832,18 +612,18 @@
 		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
 			<div class="article-copyright-info-container">
     <ul>
-        <li><strong>Title:</strong> How to use USC CARC</li>
+        <li><strong>Title:</strong> Postgres Commands</li>
         <li><strong>Author:</strong> Hao Feng</li>
         <li><strong>Created at
-                :</strong> 2024-03-27 00:23:43</li>
+                :</strong> 2025-08-14 22:37:01</li>
         
             <li>
                 <strong>Updated at
-                    :</strong> 2025-07-21 21:44:29
+                    :</strong> 2025-08-14 23:38:02
             </li>
         
         <li>
-            <strong>Link:</strong> https://matt23-star.github.io/2024/03/How-to-use-USC-CARC/
+            <strong>Link:</strong> https://matt23-star.github.io/2025/08/Postgres-Commands/
         </li>
         <li>
             <strong>
@@ -862,14 +642,6 @@
 		
 
 		
-		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
-			
-			<li class="tag-item mx-0.5">
-				<a href="/tags/CARC/">#CARC</a>&nbsp;
-			</li>
-			
-		</ul>
-		
 
 		
 
@@ -877,12 +649,12 @@
 		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
 			
 			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-				<a class="prev" rel="prev" href="/2024/10/How-To-Grab-a-Wechat-Minigame/">
+				<a class="prev" rel="prev" href="/2025/08/PostgreSQL-%E8%A7%A3%E5%86%B3%E8%86%A8%E8%83%80%E9%97%AE%E9%A2%98/">
 					<span class="left arrow-icon flex justify-center items-center">
 						<i class="fa-solid fa-chevron-left"></i>
 					</span>
 					<span class="title flex justify-center items-center">
-						<span class="post-nav-title-item truncate max-w-48">How-To-Grab-a-Wechat-Minigame?</span>
+						<span class="post-nav-title-item truncate max-w-48">PostgreSQL 解决膨胀问题</span>
 						<span class="post-nav-item">Prev posts</span>
 					</span>
 				</a>
@@ -890,9 +662,9 @@
 			
 			
 			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-				<a class="next" rel="next" href="/2024/03/front-end/">
+				<a class="next" rel="next" href="/2025/08/%E5%9F%8B%E5%9D%91/">
 					<span class="title flex justify-center items-center">
-						<span class="post-nav-title-item truncate max-w-48">HTML 4</span>
+						<span class="post-nav-title-item truncate max-w-48">LightRAG - 埋坑</span>
 						<span class="post-nav-item">Next posts</span>
 					</span>
 					<span class="right arrow-icon flex justify-center items-center">
@@ -954,8 +726,8 @@
 		<div class="post-toc-wrap">
 	<div class="post-toc">
 		<div class="toc-title">On this page</div>
-		<div class="page-title">How to use USC CARC</div>
-		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-use-CARC"><span class="nav-text">How to use CARC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CARC-OnDemand"><span class="nav-text">CARC OnDemand</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-connect-via-SSH"><span class="nav-text">How to connect via SSH</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Connect-to-the-USC-network-or-Research-VPN"><span class="nav-text">Connect to the USC network or Research VPN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logging-in"><span class="nav-text">Logging in</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Files"><span class="nav-text">Files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-and-Run-software"><span class="nav-text">Install and Run software</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-module-with-Conda-mamba"><span class="nav-text">Install module with Conda &#x2F; mamba</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jobs"><span class="nav-text">Jobs</span></a></li></ol></li></ol></li></ol>
+		<div class="page-title">Postgres Commands</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PostgreSQL-%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4-%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5"><span class="nav-text">PostgreSQL 常见命令&#x2F;查询语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5"><span class="nav-text">数据库连接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%88%96%E6%9C%AC%E6%9C%BA%E4%B8%8B%E8%BD%BDPostgreSQL%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-text">在服务器或本机下载PostgreSQL客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">连接数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%93%E4%B8%8E%E8%A1%A8%E6%93%8D%E4%BD%9C"><span class="nav-text">库与表操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E8%A1%A8%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="nav-text">查看所有表的大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E7%B4%A2%E5%BC%95%E7%9A%84%E6%83%85%E5%86%B5%EF%BC%88%E5%A4%A7%E5%B0%8F%EF%BC%8C%E4%BD%BF%E7%94%A8%E6%AC%A1%E6%95%B0%EF%BC%89"><span class="nav-text">查看所有索引的情况（大小，使用次数）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%8D%95%E4%B8%AA%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%83%85%E5%86%B5"><span class="nav-text">查看单个表的基本情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%8D%95%E4%B8%AA%E8%A1%A8%E7%9A%84%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%A4%A7%E5%B0%8F-%E7%B4%A2%E5%BC%95%E5%A4%A7%E5%B0%8F-TOAST-%E5%A4%A7%E5%B0%8F"><span class="nav-text">查看单个表的表数据大小 + 索引大小 + TOAST 大小</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E6%94%B6%E7%A9%BA%E6%B4%9E-%E8%A7%A3%E5%86%B3%E7%A9%BA%E9%97%B4%E8%86%A8%E8%83%80%E9%97%AE%E9%A2%98"><span class="nav-text">回收空洞&#x2F; 解决空间膨胀问题</span></a></li></ol></li></ol>
 
 	</div>
 </div>
