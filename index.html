@@ -669,11 +669,11 @@ mjx-container[display="true"] + br {
 
         <div class="statistics flex justify-around my-2.5">
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">22</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">23</div>
         <div class="label text-third-text-color text-sm">Tags</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">6</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">7</div>
         <div class="label text-third-text-color text-sm">Categories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
@@ -709,11 +709,11 @@ mjx-container[display="true"] + br {
 </div>
                 <div class="statistics flex justify-around my-2.5">
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">22</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">23</div>
         <div class="label text-third-text-color text-sm">Tags</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">6</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">7</div>
         <div class="label text-third-text-color text-sm">Categories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
@@ -750,7 +750,17 @@ mjx-container[display="true"] + br {
                     <div class="home-article-content markdown-body">
                         
                             
-                            
+                            1. VACUUMPostgreSQL 内置命令，有两种模式：
+
+VACUUM（普通）
+回收表中已删除或过期的元组（dead tuples）的空间。
+空间一般不会释放给操作系统，而是留在表文件中供后续插入&#x2F;更新复用。
+速度快，不会锁表（仅短暂锁元数据）。
+
+
+VACUUM FULL
+会新建一个干净的表文件，把有效数据重写到新文件中，释放磁盘空间给 OS。
+会持有表的排它锁（excl...
                         
                     </div>
 
@@ -764,6 +774,49 @@ mjx-container[display="true"] + br {
             </span>
         </span>
         
+            <span class="home-article-category">
+                <i class="fa-solid fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/Dragons/">Dragons</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/Dragons/Database/">Database</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/Controller/">Controller</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/PostgreSQL/">PostgreSQL</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
         
     </div>
 

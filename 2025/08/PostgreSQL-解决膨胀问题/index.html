@@ -140,8 +140,10 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://matt23-star.github.io/images/redefine-og.webp">
 <meta property="article:published_time" content="2025-08-14T15:38:28.000Z">
-<meta property="article:modified_time" content="2025-08-14T15:38:28.210Z">
+<meta property="article:modified_time" content="2025-08-14T15:41:55.284Z">
 <meta property="article:author" content="Hao Feng">
+<meta property="article:tag" content="Controller">
+<meta property="article:tag" content="PostgreSQL">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://matt23-star.github.io/images/redefine-og.webp">
     
@@ -502,11 +504,11 @@
 
         <div class="statistics flex justify-around my-2.5">
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">22</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">23</div>
         <div class="label text-third-text-color text-sm">Tags</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">6</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">7</div>
         <div class="label text-third-text-color text-sm">Categories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
@@ -561,13 +563,54 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-08-14 23:38:28</span>
-            <span class="mobile">2025-08-14 23:38:28</span>
+            <span class="desktop">2025-08-14 23:41:55</span>
+            <span class="mobile">2025-08-14 23:41:55</span>
             <span class="hover-info">Updated</span>
         </span>
     
 
     
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/Dragons/">Dragons</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/Dragons/Database/">Database</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Controller/">Controller</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/PostgreSQL/">PostgreSQL</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
     
 
     
@@ -589,7 +632,101 @@
 
 
 		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-			
+			<h2 id="1-VACUUM"><a href="#1-VACUUM" class="headerlink" title="1. VACUUM"></a>1. VACUUM</h2><p>PostgreSQL 内置命令，有两种模式：</p>
+<ul>
+<li><strong><code>VACUUM</code>（普通）</strong><ul>
+<li>回收表中已删除或过期的元组（dead tuples）的空间。</li>
+<li>空间一般不会释放给操作系统，而是留在表文件中供后续插入&#x2F;更新复用。</li>
+<li>速度快，不会锁表（仅短暂锁元数据）。</li>
+</ul>
+</li>
+<li><strong><code>VACUUM FULL</code></strong><ul>
+<li>会新建一个干净的表文件，把有效数据重写到新文件中，释放磁盘空间给 OS。</li>
+<li>会<strong>持有表的排它锁</strong>（exclusive lock），阻塞所有读写。</li>
+<li>适合空间膨胀特别严重的场景，但会中断业务。</li>
+</ul>
+</li>
+</ul>
+<p><strong>总结：</strong></p>
+<ul>
+<li>优点：Postgres 自带，简单直接。</li>
+<li>缺点：普通 VACUUM 不释放磁盘；FULL 会长时间锁表。</li>
+</ul>
+<hr>
+<h2 id="2-pg-repack"><a href="#2-pg-repack" class="headerlink" title="2. pg_repack"></a>2. pg_repack</h2><p>pg_repack 是一个 <strong>在线重建表和索引</strong> 的扩展工具。</p>
+<ul>
+<li>核心思路：在后台新建一个无膨胀的新表&#x2F;索引，通过触发器捕捉并同步变更，最后原子替换。</li>
+<li>能释放磁盘空间，而且全程几乎<strong>不阻塞读写</strong>（最终切换时会有极短锁）。</li>
+<li>还可以重建索引以减少索引膨胀。</li>
+<li>适合在<strong>生产环境</strong>进行空间回收和重建，无需停机。</li>
+</ul>
+<p><strong>总结：</strong></p>
+<ul>
+<li>优点：释放空间 + 不长时间阻塞业务。</li>
+<li>缺点：需要安装扩展，有一定系统开销；对于极大表会产生额外的 I&#x2F;O。</li>
+</ul>
+<hr>
+<h2 id="3-pg-squeeze"><a href="#3-pg-squeeze" class="headerlink" title="3. pg_squeeze"></a>3. pg_squeeze</h2><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/cybertec-postgresql/pg_squeeze" >pg_squeeze<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> 是另一个 <strong>在线去膨胀</strong> 工具，但和 pg_repack 有些区别：</p>
+<ul>
+<li>利用逻辑解码（logical decoding）在后台创建无膨胀的新表，并复制原表数据，同时捕捉 WAL 中的增量变更。</li>
+<li>支持<strong>自动化去膨胀</strong>（可定时运行，不需要手工触发）。</li>
+<li>对大表更友好，减少一次性重写的压力。</li>
+<li>相比 pg_repack，它的<strong>目标更偏自动维护</strong>，而不是一次性的手动空间回收。</li>
+</ul>
+<p><strong>总结：</strong></p>
+<ul>
+<li>优点：可自动化、在线运行、减少维护成本。</li>
+<li>缺点：需要开启 <code>wal_level = logical</code>，对 WAL 有额外压力；安装和配置比 pg_repack 复杂。</li>
+</ul>
+<hr>
+<h2 id="对比表"><a href="#对比表" class="headerlink" title="对比表"></a>对比表</h2><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>是否在线</th>
+<th>是否释放 OS 空间</th>
+<th>是否锁表</th>
+<th>使用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>VACUUM</td>
+<td>是</td>
+<td>否（普通）</td>
+<td>否</td>
+<td>日常维护，防止膨胀</td>
+</tr>
+<tr>
+<td>VACUUM FULL</td>
+<td>否</td>
+<td>是</td>
+<td>是（长时间）</td>
+<td>紧急空间回收</td>
+</tr>
+<tr>
+<td>pg_repack</td>
+<td>是</td>
+<td>是</td>
+<td>仅切换时极短</td>
+<td>手动在线去膨胀 &#x2F; 重建索引</td>
+</tr>
+<tr>
+<td>pg_squeeze</td>
+<td>是</td>
+<td>是</td>
+<td>仅切换时极短</td>
+<td>自动化去膨胀，大表长期维护</td>
+</tr>
+</tbody></table>
+<hr>
+<p>💡 <strong>经验建议</strong></p>
+<ul>
+<li>日常：<code>VACUUM</code> + <code>ANALYZE</code>（自动&#x2F;定时）</li>
+<li>空间膨胀严重但可停机：<code>VACUUM FULL</code></li>
+<li>空间膨胀严重且业务不能停：<code>pg_repack</code></li>
+<li>希望长期自动化、平滑去膨胀：<code>pg_squeeze</code></li>
+</ul>
+
 		</div>
 
 		
@@ -603,7 +740,7 @@
         
             <li>
                 <strong>Updated at
-                    :</strong> 2025-08-14 23:38:28
+                    :</strong> 2025-08-14 23:41:55
             </li>
         
         <li>
@@ -625,6 +762,18 @@
 		</div>
 		
 
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/Controller/">#Controller</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/PostgreSQL/">#PostgreSQL</a>&nbsp;
+			</li>
+			
+		</ul>
 		
 
 		
@@ -699,7 +848,7 @@
 	<div class="post-toc">
 		<div class="toc-title">On this page</div>
 		<div class="page-title">PostgreSQL 解决膨胀问题</div>
-		
+		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-VACUUM"><span class="nav-text">1. VACUUM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-pg-repack"><span class="nav-text">2. pg_repack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-pg-squeeze"><span class="nav-text">3. pg_squeeze</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94%E8%A1%A8"><span class="nav-text">对比表</span></a></li></ol>
 
 	</div>
 </div>
