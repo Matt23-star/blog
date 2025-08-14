@@ -133,14 +133,14 @@
         
         <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PostgreSQL 解决膨胀问题">
+<meta property="og:title" content="PostgreSQL 如何解决膨胀问题？">
 <meta property="og:url" content="https://matt23-star.github.io/2025/08/PostgreSQL-%E8%A7%A3%E5%86%B3%E8%86%A8%E8%83%80%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Hello World!">
 <meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://matt23-star.github.io/images/redefine-og.webp">
 <meta property="article:published_time" content="2025-08-14T15:38:28.000Z">
-<meta property="article:modified_time" content="2025-08-14T15:41:55.284Z">
+<meta property="article:modified_time" content="2025-08-14T16:15:05.758Z">
 <meta property="article:author" content="Hao Feng">
 <meta property="article:tag" content="Controller">
 <meta property="article:tag" content="PostgreSQL">
@@ -157,7 +157,7 @@
     
     <title>
         
-            PostgreSQL 解决膨胀问题 | Matt&#39;s Journey Notes
+            PostgreSQL 如何解决膨胀问题？ | Matt&#39;s Journey Notes
         
     </title>
 
@@ -508,7 +508,7 @@
         <div class="label text-third-text-color text-sm">Tags</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">7</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">8</div>
         <div class="label text-third-text-color text-sm">Categories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
@@ -535,7 +535,7 @@
 		<div class="article-title relative w-full">
 			
 			<div class="w-full flex items-center pt-6 justify-start">
-				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">PostgreSQL 解决膨胀问题</h1>
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">PostgreSQL 如何解决膨胀问题？</h1>
 			</div>
 			
 		</div>
@@ -563,8 +563,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-08-14 23:41:55</span>
-            <span class="mobile">2025-08-14 23:41:55</span>
+            <span class="desktop">2025-08-15 00:15:05</span>
+            <span class="mobile">2025-08-15 00:15:05</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -588,7 +588,7 @@
                             <li>></li>
                         
                         <li>
-                            <a href="/categories/Dragons/Database/">Database</a>&nbsp;
+                            <a href="/categories/Dragons/Database-Dragon/">Database\ Dragon</a>&nbsp;
                         </li>
                     
                     
@@ -632,7 +632,7 @@
 
 
 		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-			<h2 id="1-VACUUM"><a href="#1-VACUUM" class="headerlink" title="1. VACUUM"></a>1. VACUUM</h2><p>PostgreSQL 内置命令，有两种模式：</p>
+			<h1 id="PostgreSQL-如何解决膨胀问题？"><a href="#PostgreSQL-如何解决膨胀问题？" class="headerlink" title="PostgreSQL 如何解决膨胀问题？"></a>PostgreSQL 如何解决膨胀问题？</h1><h2 id="1-VACUUM"><a href="#1-VACUUM" class="headerlink" title="1. VACUUM"></a>1. VACUUM</h2><p>PostgreSQL 内置命令，有两种模式：</p>
 <ul>
 <li><strong><code>VACUUM</code>（普通）</strong><ul>
 <li>回收表中已删除或过期的元组（dead tuples）的空间。</li>
@@ -653,7 +653,10 @@
 <li>缺点：普通 VACUUM 不释放磁盘；FULL 会长时间锁表。</li>
 </ul>
 <hr>
-<h2 id="2-pg-repack"><a href="#2-pg-repack" class="headerlink" title="2. pg_repack"></a>2. pg_repack</h2><p>pg_repack 是一个 <strong>在线重建表和索引</strong> 的扩展工具。</p>
+<h2 id="2-pg-repack"><a href="#2-pg-repack" class="headerlink" title="2. pg_repack"></a>2. pg_repack</h2><blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/cybertec-postgresql/pg_squeeze" >pg_repack官方库<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+</blockquote>
+<p>pg_repack 是一个 <strong>在线重建表和索引</strong> 的扩展工具。</p>
 <ul>
 <li>核心思路：在后台新建一个无膨胀的新表&#x2F;索引，通过触发器捕捉并同步变更，最后原子替换。</li>
 <li>能释放磁盘空间，而且全程几乎<strong>不阻塞读写</strong>（最终切换时会有极短锁）。</li>
@@ -666,7 +669,10 @@
 <li>缺点：需要安装扩展，有一定系统开销；对于极大表会产生额外的 I&#x2F;O。</li>
 </ul>
 <hr>
-<h2 id="3-pg-squeeze"><a href="#3-pg-squeeze" class="headerlink" title="3. pg_squeeze"></a>3. pg_squeeze</h2><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/cybertec-postgresql/pg_squeeze" >pg_squeeze<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> 是另一个 <strong>在线去膨胀</strong> 工具，但和 pg_repack 有些区别：</p>
+<h2 id="3-pg-squeeze"><a href="#3-pg-squeeze" class="headerlink" title="3. pg_squeeze"></a>3. pg_squeeze</h2><blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/cybertec-postgresql/pg_squeeze" >pg_squeeze官网<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> </p>
+</blockquote>
+<p>pg_squeeze是另一个 <strong>在线去膨胀</strong> 工具，但和 pg_repack 有些区别：</p>
 <ul>
 <li>利用逻辑解码（logical decoding）在后台创建无膨胀的新表，并复制原表数据，同时捕捉 WAL 中的增量变更。</li>
 <li>支持<strong>自动化去膨胀</strong>（可定时运行，不需要手工触发）。</li>
@@ -733,14 +739,14 @@
 		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
 			<div class="article-copyright-info-container">
     <ul>
-        <li><strong>Title:</strong> PostgreSQL 解决膨胀问题</li>
+        <li><strong>Title:</strong> PostgreSQL 如何解决膨胀问题？</li>
         <li><strong>Author:</strong> Hao Feng</li>
         <li><strong>Created at
                 :</strong> 2025-08-14 23:38:28</li>
         
             <li>
                 <strong>Updated at
-                    :</strong> 2025-08-14 23:41:55
+                    :</strong> 2025-08-15 00:15:05
             </li>
         
         <li>
@@ -847,8 +853,8 @@
 		<div class="post-toc-wrap">
 	<div class="post-toc">
 		<div class="toc-title">On this page</div>
-		<div class="page-title">PostgreSQL 解决膨胀问题</div>
-		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-VACUUM"><span class="nav-text">1. VACUUM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-pg-repack"><span class="nav-text">2. pg_repack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-pg-squeeze"><span class="nav-text">3. pg_squeeze</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94%E8%A1%A8"><span class="nav-text">对比表</span></a></li></ol>
+		<div class="page-title">PostgreSQL 如何解决膨胀问题？</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PostgreSQL-%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E8%86%A8%E8%83%80%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-text">PostgreSQL 如何解决膨胀问题？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-VACUUM"><span class="nav-text">1. VACUUM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-pg-repack"><span class="nav-text">2. pg_repack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-pg-squeeze"><span class="nav-text">3. pg_squeeze</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94%E8%A1%A8"><span class="nav-text">对比表</span></a></li></ol></li></ol>
 
 	</div>
 </div>
