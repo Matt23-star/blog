@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Hao Feng">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://Matt23-star.github.io/2025/09/cs336-notes/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS336 Notes">
+<meta property="og:url" content="https://matt23-star.github.io/2025/09/cs336-notes/index.html">
+<meta property="og:site_name" content="Hello World!">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://matt23-star.github.io/images/redefine-og.webp">
+<meta property="article:published_time" content="2025-09-09T01:50:15.000Z">
+<meta property="article:modified_time" content="2025-09-09T02:34:53.250Z">
+<meta property="article:author" content="Hao Feng">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="CS336">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://matt23-star.github.io/images/redefine-og.webp">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/blog/images/HF.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/HF.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/blog/images/HF.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            CS336 Notes | Matt&#39;s Journey Notebook
+        
+    </title>
+
+    
+<link rel="stylesheet" href="/blog/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/blog/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/blog/css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="/blog/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/blog/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"matt23-star.github.io","root":"/blog/","language":"en"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"Matt's Journey Notebook","subtitle":{"text":["How to Train Your Dragon?"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/Matt23-star","instagram":"https://www.instagram.com/matthaofeng/","zhihu":null,"twitter":null,"email":"matthfeng@gmail.com","linkedin":"https://www.linkedin.com/in/hao-feng-welcome/","blog":"https://matt23-star.github.io/blog"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-solid fa-house"},"Blog":{"path":"/#main-content","icon":"fa-regular fa-archive"},"Archives":{"path":"archives","icon":"fa-regular fa-archive"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/#portfolio-content","Github":"https://github.com/Matt23-star","LinkedIn":"https://www.linkedin.com/in/hao-feng-welcome/","Instagram":"https://www.instagram.com/matthaofeng/","Email":"mailto:matthfeng@gmail.com"}},"Language":{"icon":"fa-solid fa-language","submenus":{"English":"/","中文":"/cn"}}},"search":{"enable":false,"preload":true},"colorSwitch":{"enable":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/8/17 11:45:14"};
+    window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/blog/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/blog/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/blog/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/blog/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+    <!-- ✅ MathJax v3 + AMS 包 + 换行支持 -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                packages: ['base', 'ams'],
+                tags: 'ams'
+            },
+            loader: {
+                load: ['[tex]/ams']
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+                renderActions: {
+                    addMenu: []
+                }
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.1.1"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+
+    
+    
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <!-- 同理，想让标题回主站：href 用 SITE_URL + target="_self" -->
+            <a class="logo-title" href="/blog/">
+            <!-- <a class="logo-title" href="https://Matt23-star.github.io" target="_self"> -->
+                
+                Matt&#39;s Journey Notebook
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="https://Matt23-star.github.io"
+                                   target=&#34;_self&#34;
+                                   >
+                                    <i class="fa-solid fa-house fa-fw"></i>
+                                    HOME
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/blog/#main-content"
+                                   
+                                   >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    BLOG
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/blog/archives"
+                                   
+                                   >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    ARCHIVES
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                   
+                                   onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    ABOUT
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/blog/#portfolio-content">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://github.com/Matt23-star">
+                                                    GITHUB
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/hao-feng-welcome/">
+                                                    LINKEDIN
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://www.instagram.com/matthaofeng/">
+                                                    INSTAGRAM
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="mailto:matthfeng@gmail.com">
+                                                    EMAIL
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                   
+                                   onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-language fa-fw"></i>
+                                    LANGUAGE
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/blog/">
+                                                    ENGLISH
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/blog/cn">
+                                                    中文
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                    
+                        <li class="navbar-item tool-dark-light-toggle">
+                            <i class="fa-regular fa-moon"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="https://Matt23-star.github.io" target=&#34;_self&#34;
+                        >
+                            <span>
+                                HOME
+                            </span>
+                            
+                                <i class="fa-solid fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/blog/#main-content" 
+                        >
+                            <span>
+                                BLOG
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/blog/archives" 
+                        >
+                            <span>
+                                ARCHIVES
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                ABOUT
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/blog/#portfolio-content">ME</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://github.com/Matt23-star">GITHUB</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://www.linkedin.com/in/hao-feng-welcome/">LINKEDIN</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://www.instagram.com/matthaofeng/">INSTAGRAM</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="mailto:matthfeng@gmail.com">EMAIL</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-Language"
+                        >
+                            <span>
+                                LANGUAGE
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-Language">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/blog/">ENGLISH</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/blog/cn">中文</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/blog/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/blog/categories"
+                        >
+                            <span>Categories</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/blog/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">24</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/blog/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">8</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/blog/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">15</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div id="main-content" class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">CS336 Notes</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="/blog/images/avatar.jpg">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">Hao Feng</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv2</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-09-08 18:50:15</span>
+        <span class="mobile">2025-09-08 18:50:15</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-09-08 19:34:53</span>
+            <span class="mobile">2025-09-08 19:34:53</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/blog/categories/Dragons/">Dragons</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/blog/categories/Dragons/LLM-Dragon/">LLM Dragon</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/blog/tags/LLM/">LLM</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/blog/tags/CS336/">CS336</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<p>[toc]</p>
+<h1 id="Lecture-2-笔记：从张量到训练循环"><a href="#Lecture-2-笔记：从张量到训练循环" class="headerlink" title="Lecture 2 笔记：从张量到训练循环"></a>Lecture 2 笔记：从张量到训练循环</h1><h2 id="1-分词技术-Tokenization"><a href="#1-分词技术-Tokenization" class="headerlink" title="1. 分词技术 (Tokenization)"></a>1. 分词技术 (Tokenization)</h2><h3 id="1-1-分词的背景与意义"><a href="#1-1-分词的背景与意义" class="headerlink" title="1.1 分词的背景与意义"></a>1.1 分词的背景与意义</h3><p>自然语言模型的输入是**整数序列 (tokens)**，因此必须先将原始文本转为 tokens。<br> Tokenizer 的职责是：</p>
+<ul>
+<li>**编码 (encode)**：string → tokens</li>
+<li>**解码 (decode)**：tokens → string</li>
+</ul>
+<blockquote>
+<p>分词器的选择直接影响模型的效率、表达能力和泛化能力。<br> 在课程中，tokenization 被称为一种 <strong>必要的“恶”</strong>：目前主流模型必须使用分词，但理想情况下我们希望模型能直接处理原始字节序列。</p>
+</blockquote>
+<hr>
+<h3 id="1-2-分词策略对比"><a href="#1-2-分词策略对比" class="headerlink" title="1.2 分词策略对比"></a>1.2 分词策略对比</h3><table>
+<thead>
+<tr>
+<th>策略</th>
+<th>词汇量大小</th>
+<th>压缩率</th>
+<th>OOV 处理</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字符分词 (Character)</td>
+<td>巨大 (~15 万 Unicode 字符)</td>
+<td>低 (~1.5)</td>
+<td>不存在 OOV</td>
+<td>能表示任何文本，实现简单</td>
+<td>词汇表过大，序列过长，效率低</td>
+</tr>
+<tr>
+<td>字节分词 (Byte)</td>
+<td>小且固定 (256)</td>
+<td>极低 (&#x3D;1)</td>
+<td>不存在 OOV</td>
+<td>词表小，覆盖面全</td>
+<td>序列最长，注意力计算极不友好</td>
+</tr>
+<tr>
+<td>词分词 (Word)</td>
+<td>巨大且不固定</td>
+<td>高</td>
+<td>需 UNK token</td>
+<td>序列短，符合语言直觉</td>
+<td>词表爆炸，无法优雅处理新词</td>
+</tr>
+<tr>
+<td>BPE (Byte Pair Encoding)</td>
+<td>可控 (可自定义)</td>
+<td>中等</td>
+<td>不存在 OOV</td>
+<td>在词汇量与序列长度间平衡</td>
+<td>贪心算法，非全局最优，训练复杂</td>
+</tr>
+</tbody></table>
+<p><strong>结论</strong></p>
+<ul>
+<li>字符&#x2F;字节分词：覆盖面广，但序列太长。</li>
+<li>词分词：序列短，但 OOV 问题严重。</li>
+<li><strong>BPE：折中方案，成为主流（GPT-2&#x2F;3&#x2F;4 使用）</strong>。</li>
+</ul>
+<hr>
+<h3 id="1-3-分词策略详解"><a href="#1-3-分词策略详解" class="headerlink" title="1.3 分词策略详解"></a>1.3 分词策略详解</h3><h4 id="1-3-1-字符分词-Character-Tokenizer"><a href="#1-3-1-字符分词-Character-Tokenizer" class="headerlink" title="1.3.1 字符分词 (Character Tokenizer)"></a>1.3.1 字符分词 (Character Tokenizer)</h4><ul>
+<li><p><strong>思想</strong>：每个 Unicode 字符 → code point (整数)。</p>
+</li>
+<li><p>示例：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">assert</span> <span class="built_in">ord</span>(<span class="string">&quot;a&quot;</span>) == <span class="number">97</span></span><br><span class="line"><span class="keyword">assert</span> <span class="built_in">ord</span>(<span class="string">&quot;🌍&quot;</span>) == <span class="number">127757</span></span><br><span class="line"><span class="keyword">assert</span> <span class="built_in">chr</span>(<span class="number">97</span>) == <span class="string">&quot;a&quot;</span></span><br><span class="line"><span class="keyword">assert</span> <span class="built_in">chr</span>(<span class="number">127757</span>) == <span class="string">&quot;🌍&quot;</span></span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>实现</strong>：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CharacterTokenizer</span>(<span class="title class_ inherited__">Tokenizer</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">encode</span>(<span class="params">self, string: <span class="built_in">str</span></span>) -&gt; <span class="built_in">list</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">ord</span>, string))</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">decode</span>(<span class="params">self, indices: <span class="built_in">list</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join(<span class="built_in">map</span>(<span class="built_in">chr</span>, indices))</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>问题</strong>：</p>
+<ul>
+<li>vocab 过大 (~150K)</li>
+<li>序列过长，稀有字符浪费容量</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="1-3-2-字节分词-Byte-Tokenizer"><a href="#1-3-2-字节分词-Byte-Tokenizer" class="headerlink" title="1.3.2 字节分词 (Byte Tokenizer)"></a>1.3.2 字节分词 (Byte Tokenizer)</h4><ul>
+<li><p><strong>思想</strong>：UTF-8 编码 → 字节序列 (0-255)。</p>
+</li>
+<li><p>示例：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">bytes</span>(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;utf-8&quot;</span>)  == <span class="string">b&quot;a&quot;</span></span><br><span class="line"><span class="built_in">bytes</span>(<span class="string">&quot;🌍&quot;</span>, <span class="string">&quot;utf-8&quot;</span>) == <span class="string">b&quot;\xf0\x9f\x8c\x8d&quot;</span></span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>实现</strong>：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ByteTokenizer</span>(<span class="title class_ inherited__">Tokenizer</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">encode</span>(<span class="params">self, string: <span class="built_in">str</span></span>) -&gt; <span class="built_in">list</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, string.encode(<span class="string">&quot;utf-8&quot;</span>)))</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">decode</span>(<span class="params">self, indices: <span class="built_in">list</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">bytes</span>(indices).decode(<span class="string">&quot;utf-8&quot;</span>)</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>优点</strong>：</p>
+<ul>
+<li>词表固定 256</li>
+<li>无 OOV</li>
+</ul>
+</li>
+<li><p><strong>缺点</strong>：</p>
+<ul>
+<li>压缩率始终为 1，序列过长</li>
+<li>对 Transformer 的注意力计算 (O(n²)) 极为低效</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="1-3-3-词分词-Word-Tokenizer"><a href="#1-3-3-词分词-Word-Tokenizer" class="headerlink" title="1.3.3 词分词 (Word Tokenizer)"></a>1.3.3 词分词 (Word Tokenizer)</h4><ul>
+<li><p><strong>思想</strong>：用正则表达式拆分单词。</p>
+</li>
+<li><p>示例：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> regex</span><br><span class="line">string = <span class="string">&quot;I&#x27;ll say supercalifragilisticexpialidocious!&quot;</span></span><br><span class="line">segments = regex.findall(<span class="string">r&quot;\w+|.&quot;</span>, string)</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>优点</strong>：</p>
+<ul>
+<li>序列短，语义自然</li>
+</ul>
+</li>
+<li><p><strong>缺点</strong>：</p>
+<ul>
+<li>vocab 爆炸，新词需 UNK</li>
+<li>OOV 导致困惑度计算困难</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="1-3-4-BPE-Byte-Pair-Encoding"><a href="#1-3-4-BPE-Byte-Pair-Encoding" class="headerlink" title="1.3.4 BPE (Byte Pair Encoding)"></a>1.3.4 BPE (Byte Pair Encoding)</h4><ul>
+<li><p><strong>历史</strong>：</p>
+<ul>
+<li>Gage (1994)：用于数据压缩</li>
+<li>Sennrich (2015)：引入机器翻译</li>
+<li>Radford (2019)：GPT-2 采用 BPE</li>
+</ul>
+</li>
+<li><p><strong>核心思想</strong>：</p>
+<ul>
+<li>从字节序列开始</li>
+<li>统计相邻 token 对频率</li>
+<li>将最高频对合并为新 token</li>
+<li>迭代，直到词表大小达到预设值</li>
+</ul>
+</li>
+<li><p><strong>训练算法 (train_bpe)</strong></p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">train_bpe</span>(<span class="params">string: <span class="built_in">str</span>, num_merges: <span class="built_in">int</span></span>) -&gt; BPETokenizerParams:</span><br><span class="line">    indices = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, string.encode(<span class="string">&quot;utf-8&quot;</span>)))</span><br><span class="line">    merges, vocab = &#123;&#125;, &#123;x: <span class="built_in">bytes</span>([x]) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>)&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num_merges):</span><br><span class="line">        counts = defaultdict(<span class="built_in">int</span>)</span><br><span class="line">        <span class="keyword">for</span> a, b <span class="keyword">in</span> <span class="built_in">zip</span>(indices, indices[<span class="number">1</span>:]):</span><br><span class="line">            counts[(a, b)] += <span class="number">1</span></span><br><span class="line">        pair = <span class="built_in">max</span>(counts, key=counts.get)</span><br><span class="line">        new_index = <span class="number">256</span> + i</span><br><span class="line">        merges[pair] = new_index</span><br><span class="line">        vocab[new_index] = vocab[pair[<span class="number">0</span>]] + vocab[pair[<span class="number">1</span>]]</span><br><span class="line">        indices = merge(indices, pair, new_index)</span><br><span class="line">    <span class="keyword">return</span> BPETokenizerParams(vocab, merges)</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>编码 (encode)</strong></p>
+<ul>
+<li>将字符串转为字节</li>
+<li>按 merges 规则合并</li>
+</ul>
+</li>
+<li><p><strong>解码 (decode)</strong></p>
+<ul>
+<li>查 vocab → 拼接字节 → UTF-8 解码</li>
+</ul>
+</li>
+<li><p><strong>优势</strong>：</p>
+<ul>
+<li>高频片段 → 单 token，提高压缩率</li>
+<li>低频片段 → 多 token，保证泛化</li>
+<li>无 OOV</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="1-4-压缩率-Compression-Ratio"><a href="#1-4-压缩率-Compression-Ratio" class="headerlink" title="1.4 压缩率 (Compression Ratio)"></a>1.4 压缩率 (Compression Ratio)</h3><p>定义：</p>
+<p>$\text{compression ratio} &#x3D; \frac{\text{num_bytes}}{\text{num_tokens}}$</p>
+<ul>
+<li>越高说明 token 越“信息密集”。</li>
+<li><strong>比较</strong>：<ul>
+<li>字符分词：~1.5</li>
+<li>字节分词：&#x3D;1</li>
+<li>词分词：高，但 OOV 问题严重</li>
+<li>BPE：折中，通常 1.5–3 左右</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="1-5-总结"><a href="#1-5-总结" class="headerlink" title="1.5 总结"></a>1.5 总结</h3><ul>
+<li><strong>Tokenizer &#x3D; encode + decode</strong></li>
+<li>字符&#x2F;字节分词：覆盖全面，但序列过长，效率低</li>
+<li>词分词：序列短，但 OOV 问题严重</li>
+<li><strong>BPE</strong>：折中方案，兼顾 vocab 控制与序列长度，成为主流</li>
+<li><strong>趋势</strong>：<ul>
+<li>探索 <strong>tokenizer-free 模型</strong>（直接从字节输入），但目前未能在大规模上取代 BPE</li>
+</ul>
+</li>
+</ul>
+<h1 id="Lecture-2-笔记：从张量到训练循环-1"><a href="#Lecture-2-笔记：从张量到训练循环-1" class="headerlink" title="Lecture 2 笔记：从张量到训练循环"></a>Lecture 2 笔记：从张量到训练循环</h1><h2 id="1-引言：从资源到模型——构建大模型的基石"><a href="#1-引言：从资源到模型——构建大模型的基石" class="headerlink" title="1 引言：从资源到模型——构建大模型的基石"></a>1 引言：从资源到模型——构建大模型的基石</h2><ul>
+<li>本讲的目标：解析训练一个现代深度学习模型所需的所有核心技术原语。</li>
+<li>方法：自下而上 (bottom-up)，从 <strong>张量 (Tensors)</strong> → <strong>模型 (Models)</strong> → <strong>优化器 (Optimizers)</strong> → **训练循环 (Training Loop)**。</li>
+<li>核心理念：<strong>效率 (Efficiency)</strong><ul>
+<li>**内存 (Memory)**：以 GB 为单位，决定模型与 batch 的大小。</li>
+<li>**计算 (Compute)**：以 FLOPs 为单位，决定训练时间与成本。</li>
+</ul>
+</li>
+<li>知识框架：<ul>
+<li><strong>Mechanics</strong>：PyTorch 原语，直观实现。</li>
+<li><strong>Mindset</strong>：资源核算，效率优先。</li>
+<li><strong>Intuitions</strong>：理解大体趋势与代价，而非细节调优。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-动机：餐巾纸数学-Napkin-Math"><a href="#2-动机：餐巾纸数学-Napkin-Math" class="headerlink" title="2 动机：餐巾纸数学 (Napkin Math)"></a>2 动机：餐巾纸数学 (Napkin Math)</h2><p>通过粗略估算快速感受大模型训练的规模：</p>
+<h3 id="问题一：70B-参数模型，15T-tokens，1024-×-H100-需要多久？"><a href="#问题一：70B-参数模型，15T-tokens，1024-×-H100-需要多久？" class="headerlink" title="问题一：70B 参数模型，15T tokens，1024 × H100 需要多久？"></a>问题一：70B 参数模型，15T tokens，1024 × H100 需要多久？</h3><ul>
+<li><p>总计算量：</p>
+<p>Total FLOPs&#x3D;6×N×D\text{Total FLOPs} &#x3D; 6 \times N \times D</p>
+<ul>
+<li>$N &#x3D; 70 \times 10^9$ (参数)</li>
+<li>$D &#x3D; 15 \times 10^{12}$ (tokens)</li>
+<li>系数 6 来源：前向传播 $2N$ + 反向传播 $4N$ &#x3D; $6N$ FLOPs。</li>
+<li>结果：$6.3 \times 10^{24}$ FLOPs。</li>
+</ul>
+</li>
+<li><p>每日计算量：</p>
+<ul>
+<li>单卡 H100 理论峰值：$1979 \times 10^{12}$&#x2F;s</li>
+<li>假设 MFU (利用率) &#x3D; 0.5</li>
+<li>1024 卡每天：约 $4.35 \times 10^{22}$ FLOPs</li>
+</ul>
+</li>
+<li><p>所需天数：</p>
+<p>Days&#x3D;6.3×10244.35×1022≈145\text{Days} &#x3D; \frac{6.3 \times 10^{24}}{4.35 \times 10^{22}} \approx 145</p>
+</li>
+</ul>
+<p><strong>结论</strong>：训练 GPT-3 规模模型即便在千卡 H100 上也需 ~5 个月。</p>
+<hr>
+<h3 id="问题二：8-×-H100，AdamW，能训练的最大模型多大？"><a href="#问题二：8-×-H100，AdamW，能训练的最大模型多大？" class="headerlink" title="问题二：8 × H100，AdamW，能训练的最大模型多大？"></a>问题二：8 × H100，AdamW，能训练的最大模型多大？</h3><ul>
+<li><p>单卡显存：80 GB</p>
+</li>
+<li><p>朴素 float32 AdamW 内存开销：</p>
+<ul>
+<li>参数：4 B</li>
+<li>梯度：4 B</li>
+<li>优化器状态 (m, v)：8 B</li>
+<li>总：16 B&#x2F;参数</li>
+</ul>
+</li>
+<li><p>8 卡总内存：$80 \times 10^9 \times 8 &#x3D; 640$ GB</p>
+</li>
+<li><p>可训练参数量：</p>
+<p>Num Params&#x3D;640×10916≈40×109\text{Num Params} &#x3D; \frac{640 \times 10^9}{16} \approx 40 \times 10^9</p>
+</li>
+</ul>
+<p><strong>结论</strong>：约 40B 参数模型（未计激活内存）。</p>
+<hr>
+<h2 id="3-张量"><a href="#3-张量" class="headerlink" title="3 张量"></a>3 张量</h2><h4 id="3-1-张量基础-Tensors-Basics"><a href="#3-1-张量基础-Tensors-Basics" class="headerlink" title="3.1 张量基础 (Tensors Basics)"></a>3.1 张量基础 (Tensors Basics)</h4><p>张量是深度学习中存储一切的基本单元：参数、梯度、优化器状态、数据、激活。</p>
+<ul>
+<li><p>创建张量：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line">x = torch.tensor([[<span class="number">1.</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line">x = torch.zeros(<span class="number">4</span>, <span class="number">8</span>)</span><br><span class="line">x = torch.ones(<span class="number">4</span>, <span class="number">8</span>)</span><br><span class="line">x = torch.randn(<span class="number">4</span>, <span class="number">8</span>)</span><br><span class="line">x = torch.empty(<span class="number">4</span>, <span class="number">8</span>)  <span class="comment"># 未初始化</span></span><br><span class="line">nn.init.trunc_normal_(x, mean=<span class="number">0</span>, std=<span class="number">1</span>, a=-<span class="number">2</span>, b=<span class="number">2</span>)</span><br></pre></td></tr></table></figure></div></li>
+</ul>
+<p>用途：先分配内存，后用自定义逻辑初始化。</p>
+<hr>
+<h3 id="3-2-内存核算-Memory-Accounting"><a href="#3-2-内存核算-Memory-Accounting" class="headerlink" title="3.2 内存核算 (Memory Accounting)"></a>3.2 内存核算 (Memory Accounting)</h3><p>几乎所有内容都存为浮点数。关键：<strong>值的数量 × 每个值的字节数</strong>。</p>
+<h4 id="3-2-1-float32-单精度"><a href="#3-2-1-float32-单精度" class="headerlink" title="3.2.1 float32 (单精度)"></a>3.2.1 float32 (单精度)</h4><ul>
+<li>结构：1 符号位 + 8 指数位 + 23 尾数位</li>
+<li>大范围，高精度，默认类型</li>
+<li>内存示例：<ul>
+<li><code>torch.zeros(4, 8)</code> → $4 \times 8 \times 4$ B &#x3D; 128 B</li>
+<li>GPT-3 前馈层矩阵 $12288 \times 12288$ → 2.3 GB</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-2-2-float16-半精度"><a href="#3-2-2-float16-半精度" class="headerlink" title="3.2.2 float16 (半精度)"></a>3.2.2 float16 (半精度)</h4><ul>
+<li>结构：1 符号位 + 5 指数位 + 10 尾数位</li>
+<li>内存减半 (2B&#x2F;值)</li>
+<li>缺陷：动态范围窄，小数易下溢 (如 $1e-8 \to 0$)</li>
+<li>风险：训练不稳定</li>
+</ul>
+<h4 id="3-2-3-bfloat16-脑浮点"><a href="#3-2-3-bfloat16-脑浮点" class="headerlink" title="3.2.3 bfloat16 (脑浮点)"></a>3.2.3 bfloat16 (脑浮点)</h4><ul>
+<li>Google Brain 2018 提出</li>
+<li>结构：1 符号位 + 8 指数位 + 7 尾数位</li>
+<li>动态范围 &#x3D; float32，避免下溢</li>
+<li>精度低于 float16，但足够用于深度学习</li>
+<li>常用于计算，而参数&#x2F;优化器仍存 float32</li>
+</ul>
+<h4 id="3-2-4-FP8-8位浮点"><a href="#3-2-4-FP8-8位浮点" class="headerlink" title="3.2.4 FP8 (8位浮点)"></a>3.2.4 FP8 (8位浮点)</h4><ul>
+<li>NVIDIA H100 支持 (2022)</li>
+<li>两种：E4M3、E5M2</li>
+<li>内存更小，但需配合 <strong>Transformer Engine</strong> 软件栈</li>
+<li>依赖自动缩放&#x2F;转换策略</li>
+</ul>
+<hr>
+<h3 id="3-3-浮点格式对比"><a href="#3-3-浮点格式对比" class="headerlink" title="3.3 浮点格式对比"></a>3.3 浮点格式对比</h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>float32</th>
+<th>float16</th>
+<th>bfloat16</th>
+<th>FP8</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>总位数</td>
+<td>32</td>
+<td>16</td>
+<td>16</td>
+<td>8</td>
+</tr>
+<tr>
+<td>指数位</td>
+<td>8</td>
+<td>5</td>
+<td>8</td>
+<td>4&#x2F;5</td>
+</tr>
+<tr>
+<td>尾数位</td>
+<td>23</td>
+<td>10</td>
+<td>7</td>
+<td>2&#x2F;3</td>
+</tr>
+<tr>
+<td>动态范围</td>
+<td>极大</td>
+<td>有限</td>
+<td>与 fp32 相同</td>
+<td>较窄</td>
+</tr>
+<tr>
+<td>精度</td>
+<td>高</td>
+<td>中</td>
+<td>低</td>
+<td>极低</td>
+</tr>
+<tr>
+<td>内存&#x2F;计算开销</td>
+<td>大</td>
+<td>中</td>
+<td>中</td>
+<td>极小</td>
+</tr>
+<tr>
+<td>训练稳定性</td>
+<td>稳定</td>
+<td>容易下溢</td>
+<td>稳定</td>
+<td>需谨慎</td>
+</tr>
+</tbody></table>
+<p><strong>要点</strong>：</p>
+<ul>
+<li>float32：稳定可靠，内存开销大</li>
+<li>float16：节省内存，但风险高</li>
+<li>bfloat16：折中，常用</li>
+<li>FP8：极致效率，需硬件&#x2F;软件支持</li>
+</ul>
+<hr>
+<h3 id="3-4-现代解决方案：混合精度训练-Mixed-Precision-Training"><a href="#3-4-现代解决方案：混合精度训练-Mixed-Precision-Training" class="headerlink" title="3.4 现代解决方案：混合精度训练 (Mixed Precision Training)"></a>3.4 现代解决方案：混合精度训练 (Mixed Precision Training)</h3><ul>
+<li>思路：结合高精度与低精度优势</li>
+<li>参数&#x2F;优化器：float32</li>
+<li>前向&#x2F;部分计算：bfloat16 &#x2F; fp16</li>
+<li>部分关键模块（如注意力）：保留 float32</li>
+<li>工具：NVIDIA Transformer Engine 提供自动缩放和类型转换</li>
+</ul>
+<p><strong>结论</strong>：混合精度是当前主流，兼顾速度、内存与稳定性。</p>
+<hr>
+<h2 id="4-张量存储与视图-Tensor-Storage-Views"><a href="#4-张量存储与视图-Tensor-Storage-Views" class="headerlink" title="4 张量存储与视图 (Tensor Storage &amp; Views)"></a>4 张量存储与视图 (Tensor Storage &amp; Views)</h2><ul>
+<li><p><strong>PyTorch 张量本质</strong>：指针 + 元数据</p>
+<ul>
+<li><strong>Shape</strong>：形状</li>
+<li><strong>Stride</strong>：跨距 (定位逻辑索引到内存)</li>
+<li><strong>Storage Offset</strong>：起始偏移量</li>
+</ul>
+</li>
+<li><p>示例：4×4 矩阵</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">x = torch.tensor([</span><br><span class="line">    [0., 1, 2, 3],</span><br><span class="line">    [4, 5, 6, 7],</span><br><span class="line">    [8, 9, 10, 11],</span><br><span class="line">    [12, 13, 14, 15],</span><br><span class="line">])</span><br><span class="line">assert x.stride(0) == 4  # 行方向跨距</span><br><span class="line">assert x.stride(1) == 1  # 列方向跨距</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>定位元素公式：</p>
+</li>
+</ul>
+<p><strong>结论</strong>：张量是存储的“视图”，而不是独立的数据块。</p>
+<h2 id="5-零成本操作：视图-vs-拷贝"><a href="#5-零成本操作：视图-vs-拷贝" class="headerlink" title="5 零成本操作：视图 vs 拷贝"></a>5 零成本操作：视图 vs 拷贝</h2><ul>
+<li>**视图 (View)**：只改变元数据，不复制底层存储<ul>
+<li><code>x[0, :]</code>、<code>x[:, 1]</code></li>
+<li><code>.view()</code>、<code>.transpose()</code></li>
+<li>修改原张量会同步影响视图</li>
+</ul>
+</li>
+<li>**拷贝 (Copy)**：创建新存储，占用额外内存<ul>
+<li>非连续张量必须 <code>.contiguous()</code> 后才能 <code>.view()</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>要点</strong>：性能优化中尽量使用视图，避免无意识拷贝。</p>
+<h2 id="6-张量操作分类"><a href="#6-张量操作分类" class="headerlink" title="6 张量操作分类"></a>6 张量操作分类</h2><h3 id="6-1-逐元素操作-Element-wise"><a href="#6-1-逐元素操作-Element-wise" class="headerlink" title="6.1 逐元素操作 (Element-wise)"></a>6.1 逐元素操作 (Element-wise)</h3><ul>
+<li><p>对每个元素独立运算</p>
+</li>
+<li><p>示例：</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">x = torch.tensor([1, 4, 9])</span><br><span class="line">x.pow(2)  # 平方</span><br><span class="line">x.sqrt()  # 开方</span><br><span class="line">x + x</span><br><span class="line">x * 2</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>复杂示例：因果注意力 mask</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">x = torch.ones(3, 3).triu()</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>复杂度：$O(mn)$</p>
+</li>
+</ul>
+<h3 id="6-2-矩阵乘法-Matrix-Multiplication"><a href="#6-2-矩阵乘法-Matrix-Multiplication" class="headerlink" title="6.2 矩阵乘法 (Matrix Multiplication)"></a>6.2 矩阵乘法 (Matrix Multiplication)</h3><ul>
+<li><p>核心运算：“深度学习的面包黄油”</p>
+</li>
+<li><p>示例：</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">x = torch.ones(16, 32)</span><br><span class="line">w = torch.ones(32, 2)</span><br><span class="line">y = x @ w</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>批处理：输入 $(B, S, D_{in})$，权重 $(D_{in}, D_{out})$</p>
+<ul>
+<li>输出 $(B, S, D_{out})$</li>
+</ul>
+</li>
+<li><p>复杂度：$O(BDK)$，FLOPs &#x3D; $2BDK$</p>
+</li>
+</ul>
+<h3 id="6-3-高级张量操作：Einops-库"><a href="#6-3-高级张量操作：Einops-库" class="headerlink" title="6.3 高级张量操作：Einops 库"></a>6.3 高级张量操作：Einops 库</h3><ul>
+<li><p>动机：PyTorch 默认索引可读性差 (<code>-1, -2</code> 容易出错)</p>
+</li>
+<li><p><strong>核心函数</strong>：</p>
+<ul>
+<li><p><strong>einsum</strong>：广义矩阵乘法</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">z = einsum(x, y, &quot;batch seq1 hidden, batch seq2 hidden -&gt; batch seq1 seq2&quot;)</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>reduce</strong>：聚合降维</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">y = reduce(x, &quot;batch seq hidden -&gt; batch seq&quot;, &quot;mean&quot;)</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>rearrange</strong>：拆分与合并维度</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">x = rearrange(x, &quot;b s (h d) -&gt; b s h d&quot;, h=num_heads)</span><br></pre></td></tr></table></figure></div></li>
+</ul>
+</li>
+</ul>
+<p><strong>结论</strong>：einops 提升可读性与健壮性，适合复杂模型（如多头注意力）。</p>
+<h2 id="7-计算核算-Compute-Accounting"><a href="#7-计算核算-Compute-Accounting" class="headerlink" title="7 计算核算 (Compute Accounting)"></a>7 计算核算 (Compute Accounting)</h2><h3 id="7-1-FLOPs-与-FLOP-s"><a href="#7-1-FLOPs-与-FLOP-s" class="headerlink" title="7.1 FLOPs 与 FLOP&#x2F;s"></a>7.1 FLOPs 与 FLOP&#x2F;s</h3><ul>
+<li><strong>FLOPs</strong>：总运算量 (e.g. GPT-3 训练 $~3.1 \times 10^{23}$)</li>
+<li><strong>FLOP&#x2F;s</strong>：硬件性能 (e.g. H100 $~ 10^{15}$&#x2F;s)</li>
+<li>注意区分：小写 s (总量) vs 大写 S (速率)</li>
+</ul>
+<h3 id="7-2-矩阵乘法-FLOPs"><a href="#7-2-矩阵乘法-FLOPs" class="headerlink" title="7.2 矩阵乘法 FLOPs"></a>7.2 矩阵乘法 FLOPs</h3><ul>
+<li>公式：$2 \times m \times n \times p$</li>
+<li>前向传播 FLOPs ≈ $2 \times$ (tokens × 参数)</li>
+<li>反向传播 FLOPs ≈ $4 \times$ (tokens × 参数)</li>
+<li>总 FLOPs &#x3D; 前向 + 反向 &#x3D; $6$ × (tokens × 参数)</li>
+</ul>
+<h3 id="7-3-硬件利用率-MFU"><a href="#7-3-硬件利用率-MFU" class="headerlink" title="7.3 硬件利用率 (MFU)"></a>7.3 硬件利用率 (MFU)</h3><ul>
+<li>定义：</li>
+<li>指标：&gt;0.5 已属优秀</li>
+<li>瓶颈可能来源：I&#x2F;O、通信、内存访问、非优化代码</li>
+<li>提升 MFU &#x3D; 更低的成本 + 更快的训练</li>
+</ul>
+<h2 id="8-梯度与反向传播-Gradients-Backprop"><a href="#8-梯度与反向传播-Gradients-Backprop" class="headerlink" title="8 梯度与反向传播 (Gradients &amp; Backprop)"></a>8 梯度与反向传播 (Gradients &amp; Backprop)</h2><h3 id="8-1-自动微分-Autograd"><a href="#8-1-自动微分-Autograd" class="headerlink" title="8.1 自动微分 (Autograd)"></a>8.1 自动微分 (Autograd)</h3><ul>
+<li>步骤：<ol>
+<li><code>requires_grad=True</code></li>
+<li>前向传播 → loss</li>
+<li>调用 <code>.backward()</code></li>
+<li>梯度存于 <code>.grad</code></li>
+</ol>
+</li>
+</ul>
+<h3 id="8-2-梯度-FLOPs"><a href="#8-2-梯度-FLOPs" class="headerlink" title="8.2 梯度 FLOPs"></a>8.2 梯度 FLOPs</h3><ul>
+<li>两层线性模型：<ul>
+<li>$h1 &#x3D; x @ w1$，$h2 &#x3D; h1 @ w2$</li>
+<li>loss &#x3D; $h2^2$.mean()</li>
+</ul>
+</li>
+<li>前向 FLOPs：$2BD(D+K)$</li>
+<li>反向 FLOPs：$4BD(D+K)$</li>
+<li><strong>总 FLOPs &#x3D; 前向 + 反向 &#x3D; $6B \times$ 参数量</strong></li>
+<li><strong>结论</strong>：反向传播的计算量 ≈ 前向的两倍</li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ul>
+<li>张量是指针 + 元数据，视图操作零成本，拷贝需谨慎。</li>
+<li>逐元素运算 $O(n)$，矩阵乘法 $O(n^3)$，后者主导计算成本。</li>
+<li>Einops 提供声明式接口，简化复杂张量操作。</li>
+<li>FLOPs 核算：前向 2N，反向 4N，总 6N。</li>
+<li>硬件性能通过 <strong>MFU</strong> 衡量，&gt;0.5 已属良好。</li>
+<li><strong>关键认知</strong>：效率优化的根本在于理解并量化内存与计算代价。</li>
+</ul>
+<h2 id="9-nn-Parameter-与初始化"><a href="#9-nn-Parameter-与初始化" class="headerlink" title="9 nn.Parameter 与初始化"></a>9 nn.Parameter 与初始化</h2><ul>
+<li><p><strong>nn.Parameter</strong>：<code>torch.Tensor</code> 的子类，被赋值到 <code>nn.Module</code> 属性时会自动注册到模型参数列表。优化器会自动追踪这些参数。</p>
+</li>
+<li><p><strong>初始化问题</strong>：若输入维度过大，随机初始化可能导致输出方差随输入维度增长，引发梯度爆炸。</p>
+</li>
+<li><p><strong>解决方案</strong>：Xavier 初始化（Glorot 初始化）。通过按输入维度平方根缩放，保证输出方差稳定。</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">self.weight = nn.Parameter(torch.randn(input_dim, output_dim) / np.sqrt(input_dim))</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>改进</strong>：可进一步使用截断正态分布，避免极端值。</p>
+</li>
+</ul>
+<h3 id="9-1-自定义模型：Linear-与-Cruncher"><a href="#9-1-自定义模型：Linear-与-Cruncher" class="headerlink" title="9.1 自定义模型：Linear 与 Cruncher"></a>9.1 自定义模型：Linear 与 Cruncher</h3><ul>
+<li><p><strong>Linear 层</strong>：简单的线性变换，继承自 <code>nn.Module</code>。</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Linear(nn.Module):</span><br><span class="line">    def __init__(self, input_dim, output_dim):</span><br><span class="line">        super().__init__()</span><br><span class="line">        self.weight = nn.Parameter(torch.randn(input_dim, output_dim) / np.sqrt(input_dim))</span><br><span class="line">    def forward(self, x):</span><br><span class="line">        return x @ self.weight</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>Cruncher 模型</strong>：由多层 <code>Linear</code> 堆叠构成的深度线性网络。</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Cruncher(nn.Module):</span><br><span class="line">    def __init__(self, dim, num_layers):</span><br><span class="line">        super().__init__()</span><br><span class="line">        self.layers = nn.ModuleList([Linear(dim, dim) for _ in range(num_layers)])</span><br><span class="line">        self.final = Linear(dim, 1)</span><br><span class="line">    def forward(self, x):</span><br><span class="line">        for layer in self.layers:</span><br><span class="line">            x = layer(x)</span><br><span class="line">        return self.final(x).squeeze(-1)</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>要点</strong>：使用 <code>nn.ModuleList</code> 而不是 Python list，确保子模块参数被追踪到。</p>
+</li>
+</ul>
+<h3 id="9-2-随机性与可复现性"><a href="#9-2-随机性与可复现性" class="headerlink" title="9.2 随机性与可复现性"></a>9.2 随机性与可复现性</h3><ul>
+<li><p>随机源：参数初始化、数据顺序、Dropout 等。</p>
+</li>
+<li><p><strong>最佳实践</strong>：固定所有随机种子，保证实验可复现性。</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">import torch, numpy as np, random</span><br><span class="line">seed = 0</span><br><span class="line">torch.manual_seed(seed)</span><br><span class="line">np.random.seed(seed)</span><br><span class="line">random.seed(seed)</span><br></pre></td></tr></table></figure></div></li>
+</ul>
+<h3 id="9-3-数据加载与管道"><a href="#9-3-数据加载与管道" class="headerlink" title="9.3 数据加载与管道"></a>9.3 数据加载与管道</h3><ul>
+<li><strong>数据表示</strong>：语言模型的数据通常是 tokenizer 输出的整数序列，可序列化为 <code>numpy</code> 数组。</li>
+<li><strong>大规模数据集</strong>：TB 级语料无法一次性加载，使用 <code>np.memmap</code> 进行懒加载。</li>
+<li><strong>GPU 数据传输优化</strong>：<ul>
+<li>使用 <code>pin_memory()</code> 固定内存。</li>
+<li>在 <code>.to(device, non_blocking=True)</code> 时实现异步数据传输。</li>
+</ul>
+</li>
+</ul>
+<h3 id="9-5-优化器原理与实现"><a href="#9-5-优化器原理与实现" class="headerlink" title="9.5 优化器原理与实现"></a>9.5 优化器原理与实现</h3><ul>
+<li><p><strong>SGD</strong>：参数更新公式 <code>p -= lr * grad</code>。</p>
+</li>
+<li><p><strong>Momentum</strong>：在梯度更新中引入指数加权平均，抑制震荡。</p>
+</li>
+<li><p><strong>AdaGrad</strong>：为每个参数维护历史梯度平方和，自适应调整学习率。</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">p -= lr * grad / torch.sqrt(g2 + 1e-5)</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>RMSProp</strong>：对梯度平方使用指数加权平均。</p>
+</li>
+<li><p><strong>Adam</strong>：结合 Momentum 与 RMSProp，成为主流优化器。</p>
+</li>
+<li><p><strong>AdamW</strong>：解耦权重衰减，提升泛化性能。</p>
+</li>
+</ul>
+<h3 id="9-6-内存核算（Parameters-Activations-Gradients-Optimizer-States）"><a href="#9-6-内存核算（Parameters-Activations-Gradients-Optimizer-States）" class="headerlink" title="9.6 内存核算（Parameters, Activations, Gradients, Optimizer States）"></a>9.6 内存核算（Parameters, Activations, Gradients, Optimizer States）</h3><ul>
+<li><p><strong>参数</strong>：$D^2 \times L + D$</p>
+</li>
+<li><p><strong>激活值</strong>：$B \times D \times L$</p>
+</li>
+<li><p><strong>梯度</strong>：与参数量相同。</p>
+</li>
+<li><p><strong>优化器状态</strong>：以 AdaGrad 为例，需要额外存储平方梯度副本。</p>
+</li>
+<li><p><strong>总内存</strong>：</p>
+<p>（假设 float32，每个值 4 字节）</p>
+</li>
+</ul>
+<h3 id="9-7-训练循环与最佳实践"><a href="#9-7-训练循环与最佳实践" class="headerlink" title="9.7 训练循环与最佳实践"></a>9.7 训练循环与最佳实践</h3><ul>
+<li><strong>训练循环核心步骤</strong>：<ol>
+<li>获取 batch 数据</li>
+<li>前向传播计算 loss</li>
+<li>反向传播计算梯度</li>
+<li>优化器更新参数</li>
+<li>清空梯度，进入下一轮</li>
+</ol>
+</li>
+<li><strong>Checkpointing</strong>：定期保存模型与优化器状态，防止长时间训练崩溃后损失全部进度。</li>
+<li>**混合精度训练 (AMP)**：<ul>
+<li>参数与优化器状态：float32</li>
+<li>前向传播与激活：bfloat16 &#x2F; fp16</li>
+<li>损失缩放：解决梯度下溢问题</li>
+<li>工具：<code>torch.cuda.amp.autocast</code> + <code>GradScaler</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="10-总结"><a href="#10-总结" class="headerlink" title="10 总结"></a>10 总结</h2><ul>
+<li>模型是张量与运算的组合，<code>nn.Module</code> 提供了结构化封装。</li>
+<li>优化器从最简单的 SGD 演化到 AdamW，反映了对学习率调控与正则化理解的深化。</li>
+<li>内存与计算核算帮助我们量化训练需求。</li>
+<li>最终通过 <strong>训练循环</strong> 将所有要素集成，构成现代深度学习系统的基本执行框架。</li>
+</ul>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> CS336 Notes</li>
+        <li><strong>Author:</strong> Hao Feng</li>
+        <li><strong>Created at
+                :</strong> 2025-09-08 18:50:15</li>
+        
+            <li>
+                <strong>Updated at
+                    :</strong> 2025-09-08 19:34:53
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://matt23-star.github.io/2025/09/cs336-notes/
+        </li>
+        <li>
+            <strong>
+                License:
+            </strong>
+            
+
+            
+                This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a>.
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/blog/tags/LLM/">#LLM</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/blog/tags/CS336/">#CS336</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/blog/2025/08/PostgreSQL-%E8%A7%A3%E5%86%B3%E8%86%A8%E8%83%80%E9%97%AE%E9%A2%98/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">PostgreSQL 如何解决膨胀问题？</span>
+						<span class="post-nav-item">Next posts</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        Comments
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/blog/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://example.example.com',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+                    lang: 'zh-CN',
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">On this page</div>
+		<div class="page-title">CS336 Notes</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture-2-%E7%AC%94%E8%AE%B0%EF%BC%9A%E4%BB%8E%E5%BC%A0%E9%87%8F%E5%88%B0%E8%AE%AD%E7%BB%83%E5%BE%AA%E7%8E%AF"><span class="nav-text">Lecture 2 笔记：从张量到训练循环</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%88%86%E8%AF%8D%E6%8A%80%E6%9C%AF-Tokenization"><span class="nav-text">1. 分词技术 (Tokenization)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%88%86%E8%AF%8D%E7%9A%84%E8%83%8C%E6%99%AF%E4%B8%8E%E6%84%8F%E4%B9%89"><span class="nav-text">1.1 分词的背景与意义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%88%86%E8%AF%8D%E7%AD%96%E7%95%A5%E5%AF%B9%E6%AF%94"><span class="nav-text">1.2 分词策略对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E5%88%86%E8%AF%8D%E7%AD%96%E7%95%A5%E8%AF%A6%E8%A7%A3"><span class="nav-text">1.3 分词策略详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E5%8E%8B%E7%BC%A9%E7%8E%87-Compression-Ratio"><span class="nav-text">1.4 压缩率 (Compression Ratio)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-%E6%80%BB%E7%BB%93"><span class="nav-text">1.5 总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture-2-%E7%AC%94%E8%AE%B0%EF%BC%9A%E4%BB%8E%E5%BC%A0%E9%87%8F%E5%88%B0%E8%AE%AD%E7%BB%83%E5%BE%AA%E7%8E%AF-1"><span class="nav-text">Lecture 2 笔记：从张量到训练循环</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%BC%95%E8%A8%80%EF%BC%9A%E4%BB%8E%E8%B5%84%E6%BA%90%E5%88%B0%E6%A8%A1%E5%9E%8B%E2%80%94%E2%80%94%E6%9E%84%E5%BB%BA%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%9F%BA%E7%9F%B3"><span class="nav-text">1 引言：从资源到模型——构建大模型的基石</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%8A%A8%E6%9C%BA%EF%BC%9A%E9%A4%90%E5%B7%BE%E7%BA%B8%E6%95%B0%E5%AD%A6-Napkin-Math"><span class="nav-text">2 动机：餐巾纸数学 (Napkin Math)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80%EF%BC%9A70B-%E5%8F%82%E6%95%B0%E6%A8%A1%E5%9E%8B%EF%BC%8C15T-tokens%EF%BC%8C1024-%C3%97-H100-%E9%9C%80%E8%A6%81%E5%A4%9A%E4%B9%85%EF%BC%9F"><span class="nav-text">问题一：70B 参数模型，15T tokens，1024 × H100 需要多久？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C%EF%BC%9A8-%C3%97-H100%EF%BC%8CAdamW%EF%BC%8C%E8%83%BD%E8%AE%AD%E7%BB%83%E7%9A%84%E6%9C%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%A4%9A%E5%A4%A7%EF%BC%9F"><span class="nav-text">问题二：8 × H100，AdamW，能训练的最大模型多大？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%BC%A0%E9%87%8F"><span class="nav-text">3 张量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%86%85%E5%AD%98%E6%A0%B8%E7%AE%97-Memory-Accounting"><span class="nav-text">3.2 内存核算 (Memory Accounting)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%B5%AE%E7%82%B9%E6%A0%BC%E5%BC%8F%E5%AF%B9%E6%AF%94"><span class="nav-text">3.3 浮点格式对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E7%8E%B0%E4%BB%A3%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9A%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6%E8%AE%AD%E7%BB%83-Mixed-Precision-Training"><span class="nav-text">3.4 现代解决方案：混合精度训练 (Mixed Precision Training)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%BC%A0%E9%87%8F%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A7%86%E5%9B%BE-Tensor-Storage-Views"><span class="nav-text">4 张量存储与视图 (Tensor Storage &amp; Views)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%9B%B6%E6%88%90%E6%9C%AC%E6%93%8D%E4%BD%9C%EF%BC%9A%E8%A7%86%E5%9B%BE-vs-%E6%8B%B7%E8%B4%9D"><span class="nav-text">5 零成本操作：视图 vs 拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%BC%A0%E9%87%8F%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB"><span class="nav-text">6 张量操作分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E9%80%90%E5%85%83%E7%B4%A0%E6%93%8D%E4%BD%9C-Element-wise"><span class="nav-text">6.1 逐元素操作 (Element-wise)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95-Matrix-Multiplication"><span class="nav-text">6.2 矩阵乘法 (Matrix Multiplication)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-%E9%AB%98%E7%BA%A7%E5%BC%A0%E9%87%8F%E6%93%8D%E4%BD%9C%EF%BC%9AEinops-%E5%BA%93"><span class="nav-text">6.3 高级张量操作：Einops 库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E8%AE%A1%E7%AE%97%E6%A0%B8%E7%AE%97-Compute-Accounting"><span class="nav-text">7 计算核算 (Compute Accounting)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-FLOPs-%E4%B8%8E-FLOP-s"><span class="nav-text">7.1 FLOPs 与 FLOP&#x2F;s</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95-FLOPs"><span class="nav-text">7.2 矩阵乘法 FLOPs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-%E7%A1%AC%E4%BB%B6%E5%88%A9%E7%94%A8%E7%8E%87-MFU"><span class="nav-text">7.3 硬件利用率 (MFU)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E6%A2%AF%E5%BA%A6%E4%B8%8E%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD-Gradients-Backprop"><span class="nav-text">8 梯度与反向传播 (Gradients &amp; Backprop)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86-Autograd"><span class="nav-text">8.1 自动微分 (Autograd)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-%E6%A2%AF%E5%BA%A6-FLOPs"><span class="nav-text">8.2 梯度 FLOPs</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-text">小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-nn-Parameter-%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-text">9 nn.Parameter 与初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B%EF%BC%9ALinear-%E4%B8%8E-Cruncher"><span class="nav-text">9.1 自定义模型：Linear 与 Cruncher</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-%E9%9A%8F%E6%9C%BA%E6%80%A7%E4%B8%8E%E5%8F%AF%E5%A4%8D%E7%8E%B0%E6%80%A7"><span class="nav-text">9.2 随机性与可复现性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E4%B8%8E%E7%AE%A1%E9%81%93"><span class="nav-text">9.3 数据加载与管道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-5-%E4%BC%98%E5%8C%96%E5%99%A8%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="nav-text">9.5 优化器原理与实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-6-%E5%86%85%E5%AD%98%E6%A0%B8%E7%AE%97%EF%BC%88Parameters-Activations-Gradients-Optimizer-States%EF%BC%89"><span class="nav-text">9.6 内存核算（Parameters, Activations, Gradients, Optimizer States）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-7-%E8%AE%AD%E7%BB%83%E5%BE%AA%E7%8E%AF%E4%B8%8E%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-text">9.7 训练循环与最佳实践</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E6%80%BB%E7%BB%93"><span class="nav-text">10 总结</span></a></li></ol></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/blog/">Hao Feng</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        15 posts in total
+                    </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+
+</main>
+
+
+
+<script src="/blog/js/build/libs/Swup.min.js"></script>
+
+<script src="/blog/js/build/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/blog/js/build/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/blog/js/build/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/blog/js/build/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/blog/js/build/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	
+<script src="/blog/js/build/tools/imageViewer.js" type="module"></script>
+
+<script src="/blog/js/build/utils.js" type="module"></script>
+
+<script src="/blog/js/build/main.js" type="module"></script>
+
+<script src="/blog/js/build/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/blog/js/build/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/blog/js/build/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/blog/js/build/layouts/categoryList.js" type="module"></script>
+
+
+
+
+
+    
+<script src="/blog/js/build/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/blog/js/build/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/blog/js/build/tools/runtime.js"></script>
+
+    
+<script src="/blog/js/build/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/blog/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/blog/js/build/libs/Typed.min.js"></script>
+
+  
+<script src="/blog/js/build/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+    
+<script src="/blog/js/build/libs/anime.min.js"></script>
+
+
+
+
+
+    
+<script src="/blog/js/build/tools/tocToggle.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/blog/js/build/layouts/toc.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/blog/js/build/plugins/tabs.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+<script src="/blog/js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+<script src="/blog/js/build/layouts/essays.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+
+	
+</body>
+
+</html>
