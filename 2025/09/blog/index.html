@@ -123,7 +123,7 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="https://Matt23-star.github.io/tags/multimodal/"/>
+    <link rel="canonical" href="https://Matt23-star.github.io/2025/09/blog/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
@@ -132,13 +132,15 @@
     
         
         <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hello World!">
-<meta property="og:url" content="https://matt23-star.github.io/tags/Multimodal/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perplexity">
+<meta property="og:url" content="https://matt23-star.github.io/2025/09/blog/index.html">
 <meta property="og:site_name" content="Hello World!">
 <meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://matt23-star.github.io/images/redefine-og.webp">
+<meta property="article:published_time" content="2025-09-19T05:14:40.000Z">
+<meta property="article:modified_time" content="2025-09-19T05:24:51.469Z">
 <meta property="article:author" content="Hao Feng">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://matt23-star.github.io/images/redefine-og.webp">
@@ -153,7 +155,7 @@
     
     <title>
         
-            Tag: Multimodal | Matt&#39;s Journey Notebook
+            Perplexity | Matt&#39;s Journey Notebook
         
     </title>
 
@@ -640,58 +642,289 @@
 			
 
 			<div id="main-content" class="main-content">
-				<div class="page-template-container">
-	
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
 
-	
-	<div class="tag-name">
-    <i class="fa-solid fa-tag"></i>&nbsp;Multimodal
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">Perplexity</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="/blog/images/avatar.jpg">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">Hao Feng</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv3</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-09-18 22:14:40</span>
+        <span class="mobile">2025-09-18 22:14:40</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-09-18 22:24:51</span>
+            <span class="mobile">2025-09-18 22:24:51</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
 </div>
-<div class="tag-post-list">
-    
-<div class="archive-list-container">
-    
-        <section class="archive-item mb-spacing-unit last:mb-0">
-            <div class="archive-item-header flex flex-row items-center mb-2">
-                <span class="archive-year font-semibold text-3xl mr-2">2025</span>
-                <span class="archive-year-post-count text-xs md:text-sm font-bold rounded-small bg-third-background-color py-[2px] px-[10px] border border-border-color">1</span>
-            </div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<p>[TOC]</p>
+<h1 id="困惑度（Perplexity-PPL）终极指南"><a href="#困惑度（Perplexity-PPL）终极指南" class="headerlink" title="困惑度（Perplexity, PPL）终极指南"></a>困惑度（Perplexity, <strong>PPL</strong>）终极指南</h1><blockquote>
+<p><strong>一句话版</strong>：<strong>PPL &#x3D; 交叉熵（cross-entropy）的指数（exponential）</strong>。它度量语言模型（Language Model, <strong>LM</strong>）对“下一个 token”的不确定性（uncertainty）：越低越好，但<strong>不等同于任务能力</strong>。</p>
+</blockquote>
+<hr>
+<h2 id="1-数学定义（Mathematical-Definition"><a href="#1-数学定义（Mathematical-Definition" class="headerlink" title="1. 数学定义（Mathematical Definition)"></a>1. 数学定义（Mathematical Definition)</h2><p>给定测试序列 $x_{1:N}&#x3D;(x_1,\dots,x_N)$，自回归语言模型（autoregressive LM）给出条件概率 $p(x_i\mid x_{。<br> <strong>困惑度（Perplexity, PPL）</strong>定义为联合概率几何平均的倒数（inverse geometric mean of likelihood）：</p>
+<p>$\mathrm{PPL}(D) &#x3D; \left( \prod_{i&#x3D;1}^{N} \frac{1}{p(x_i \mid x_{</p>
+<p>这等价于<strong>每 token 交叉熵（per-token cross-entropy）</strong>的指数：</p>
+<ul>
+<li>使用<strong>自然对数（nats）</strong>：$\mathrm{PPL}&#x3D;\exp(H)$</li>
+<li>使用<strong>以 2 为底（bits）</strong>：$\mathrm{PPL}&#x3D;2^{H_2}$</li>
+</ul>
+<blockquote>
+<p>实践里（如 PyTorch <code>CrossEntropyLoss</code>），通常以 <strong>nats</strong> 计：<code>PPL = exp(loss)</code>（<code>loss</code> 为每 token 平均 NLL）。</p>
+</blockquote>
+<hr>
+<h2 id="2-直观理解（Intuition）"><a href="#2-直观理解（Intuition）" class="headerlink" title="2. 直观理解（Intuition）"></a>2. 直观理解（Intuition）</h2><ul>
+<li><strong>平均分支系数（average branching factor）</strong>：模型在每一步“有效需要考虑”的等可能选项数。</li>
+<li><strong>k 面骰子（k-sided die）类比</strong>：$\mathrm{PPL}&#x3D;100$ ≈ 每步像在 100 个<strong>均匀（uniform）</strong>候选里随机选一个。</li>
+<li><strong>理想极限</strong>：$\mathrm{PPL}&#x3D;1$（完美预测）；现实中不可达。</li>
+</ul>
+<hr>
+<h2 id="3-计算示例"><a href="#3-计算示例" class="headerlink" title="3. 计算示例"></a>3. 计算示例</h2><p>句子：<code>the cat sat</code><br> 若 $p(\text{“the”})&#x3D;0.5$、$p(\text{“cat”}\mid\text{“the”})&#x3D;0.25$、$p(\text{“sat”}\mid\text{“the cat”})&#x3D;0.125$。</p>
+<p>$H(\text{nats})&#x3D; -\frac{1}{3}\big(\ln 0.5 + \ln 0.25 + \ln 0.125\big) &#x3D; \frac{1}{3}(0.693+1.386+2.079)\approx 1.386,$$\mathrm{PPL}&#x3D;\exp(1.386)\approx 4.$</p>
+<p>（若用 $\log_2$，平均为 2 bits，$\mathrm{PPL}&#x3D;2^2&#x3D;4$。）</p>
+<hr>
+<h2 id="4-与熵-相对熵的关系（Entropy-KL）"><a href="#4-与熵-相对熵的关系（Entropy-KL）" class="headerlink" title="4. 与熵&#x2F;相对熵的关系（Entropy &amp; KL）"></a>4. 与熵&#x2F;相对熵的关系（Entropy &amp; KL）</h2><p>设真实分布为 $t$，模型分布为 $p$：</p>
+<p>$H(t,p)&#x3D;\mathbb{E}_{t}[-\log p]&#x3D;H(t)+\mathrm{KL}(t\Vert p).$</p>
+<ul>
+<li>当 $p\to t$ 时，$\mathrm{KL}\to 0$，交叉熵与 <strong>PPL</strong> 最小；</li>
+<li><strong>下界</strong>由语言自身熵 $H(t)$ 决定，而不是 1。</li>
+</ul>
+<hr>
+<h2 id="5-历史与应用（History-Usage）"><a href="#5-历史与应用（History-Usage）" class="headerlink" title="5. 历史与应用（History &amp; Usage）"></a>5. 历史与应用（History &amp; Usage）</h2><ul>
+<li><strong>起源</strong>：70 年代 <strong>speech recognition</strong>。</li>
+<li><strong>LM 早期</strong>（如 <strong>GPT-2</strong>）：在 Penn Treebank、WikiText-103 等测试集上以 <strong>PPL</strong> 横比模型架构与训练策略。</li>
+<li><strong>如今</strong>：下游任务指标（accuracy、F1、BLEU、ROUGE 等）更常用，但 <strong>PPL</strong> 在<strong>可扩展定律（Scaling Laws）**与**预训练**阶段仍然关键、且更</strong>平滑（smooth）**。</li>
+<li><strong>名词区分</strong>：统计学度量 <em>perplexity</em> ≠ 公司 <strong>Perplexity AI</strong>。</li>
+</ul>
+<hr>
+<h2 id="6-现代价值与局限（Modern-Value-Limitations）"><a href="#6-现代价值与局限（Modern-Value-Limitations）" class="headerlink" title="6. 现代价值与局限（Modern Value &amp; Limitations）"></a>6. 现代价值与局限（Modern Value &amp; Limitations）</h2><h3 id="6-1-仍然有用的场景"><a href="#6-1-仍然有用的场景" class="headerlink" title="6.1 仍然有用的场景"></a>6.1 仍然有用的场景</h3><ul>
+<li><strong>平滑性（smoothness）</strong>：随模型&#x2F;数据&#x2F;算力变化更平滑，便于拟合 <strong>Scaling Laws</strong>；</li>
+<li><strong>普适性（universality）</strong>：衡量通用语言建模能力（general LM ability），不受特定任务模板&#x2F;打分影响。</li>
+</ul>
+<h3 id="6-2-常见局限（Pitfalls）"><a href="#6-2-常见局限（Pitfalls）" class="headerlink" title="6.2 常见局限（Pitfalls）"></a>6.2 常见局限（Pitfalls）</h3><ol>
+<li><strong>不可跨分词器&#x2F;语种&#x2F;语料直接对比</strong>（tokenizer&#x2F;data dependence）<ul>
+<li>与 tokenization 强相关：BPE&#x2F;WordPiece&#x2F;Byte-level 粒度不同，PPL 数值不可直接横比；</li>
+<li>建议同时报告 <strong>BPB（bits-per-byte）&#x2F;BPC（bits-per-character）</strong> 提升可比性。</li>
+</ul>
+</li>
+<li><strong>与任务能力弱相关</strong><ul>
+<li>指令微调（instruction tuning）&#x2F;对齐（<strong>RLHF</strong>, Reinforcement Learning from Human Feedback）后，<strong>PPL 可能变大</strong>但任务表现更好。</li>
+</ul>
+</li>
+<li><strong>MLM 的 PPL 问题</strong><ul>
+<li>BERT 这类 <strong>Masked Language Model (MLM)</strong> 没有天然 PPL，常用 <strong>pseudo-perplexity（伪困惑度）</strong>：逐 token 掩蔽再评估 $-\log p(x_i)$；</li>
+<li>Seq2Seq（机器翻译, <strong>MT</strong>）可报目标端条件 PPL，但与 <strong>BLEU&#x2F;COMET</strong> 相关性不一定强。</li>
+</ul>
+</li>
+<li><strong>数据污染（data contamination）</strong><ul>
+<li>训练&#x2F;测试泄漏会<strong>虚假降低</strong> PPL，需严格去重与独立留出（held-out）。</li>
+</ul>
+</li>
+<li><strong>正则化影响（label smoothing）</strong><ul>
+<li>Label smoothing 会抬高 NLL → PPL 变差，但<strong>泛化&#x2F;校准（calibration）</strong>可能更好。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="7-可比性与单位（Comparability-Units）"><a href="#7-可比性与单位（Comparability-Units）" class="headerlink" title="7. 可比性与单位（Comparability &amp; Units）"></a>7. 可比性与单位（Comparability &amp; Units）</h2><ul>
+<li><strong>nats</strong>：<code>PPL = exp(loss)</code>；<strong>bits</strong>：<code>PPL = 2**loss_bits</code>。</li>
+<li>横比建议：<ul>
+<li>尽量统一 <strong>tokenizer + test set + evaluation script</strong>；</li>
+<li>或额外报告 <strong>BPB&#x2F;BPC</strong>。</li>
+</ul>
+</li>
+<li><strong>中文 PPL 往往更高</strong>（token 粒度&#x2F;语言结构差异），不要与英文 PPL 直接横比。</li>
+</ul>
+<hr>
+<h2 id="8-“困惑度最大化主义”（Perplexity-Maximalist-View）"><a href="#8-“困惑度最大化主义”（Perplexity-Maximalist-View）" class="headerlink" title="8. “困惑度最大化主义”（Perplexity Maximalist View）"></a>8. “困惑度最大化主义”（Perplexity Maximalist View）</h2><ul>
+<li><strong>主张</strong>：持续降低 PPL（逼近真实分布）可通往更强通用智能（<strong>AGI</strong>）。</li>
+<li><strong>理性看法</strong>：真实系统还依赖<strong>对齐（alignment）</strong>、<strong>工具使用（tool use）</strong>、<strong>检索（RAG, Retrieval-Augmented Generation）</strong>、<strong>规划（planning）</strong>、<strong>长上下文（long-context）</strong>等能力；单纯压 PPL 未必最优。</li>
+</ul>
+<hr>
+<h2 id="9-同精神基准（Perplexity-in-spirit-Benchmarks）"><a href="#9-同精神基准（Perplexity-in-spirit-Benchmarks）" class="headerlink" title="9. 同精神基准（Perplexity-in-spirit Benchmarks）"></a>9. 同精神基准（Perplexity-in-spirit Benchmarks）</h2><ul>
+<li><strong>LAMBADA（cloze）</strong>：预测段落最后一个词；</li>
+<li><strong>HellaSwag（commonsense continuation）</strong>：在多选续写中选最自然的一项。<br> 它们本质上都在考“基于上下文的后续预测（conditional next-token&#x2F;continuation prediction）”，与 PPL 的核心精神一致。</li>
+</ul>
+<hr>
+<h2 id="10-实战清单（Practical-Checklist）"><a href="#10-实战清单（Practical-Checklist）" class="headerlink" title="10. 实战清单（Practical Checklist）"></a>10. 实战清单（Practical Checklist）</h2><ul>
+<li>✅ 同一 <strong>test set + tokenizer + script</strong> 才横比；</li>
+<li>✅ 报告 <strong>loss（nats&#x2F;bits）+ PPL</strong>，明确底数（base of log）；</li>
+<li>✅ 字节&#x2F;字符级模型额外给 <strong>BPB&#x2F;BPC</strong>；</li>
+<li>✅ 标注是否 <strong>label smoothing &#x2F; temperature</strong>（评估看全分布，与采样策略无关）；</li>
+<li>✅ 严格 <strong>de-dup &#x2F; anti-contamination</strong>；</li>
+<li>⚠️ 解释与任务指标（task metrics）的差异：对齐后可能 <strong>PPL↑ 但任务能力↑</strong>；</li>
+<li>⚠️ <strong>MLM</strong> 使用 <strong>pseudo-PPL</strong> 并说明方法细节。</li>
+</ul>
+<hr>
+<h2 id="11-代码速览（PyTorch-Autoregressive-LM）"><a href="#11-代码速览（PyTorch-Autoregressive-LM）" class="headerlink" title="11. 代码速览（PyTorch, Autoregressive LM）"></a>11. 代码速览（PyTorch, Autoregressive LM）</h2><div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># logits: [B, T, V]; targets: [B, T]</span></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line">logits = model(input_ids)  <span class="comment"># autoregressive next-token logits</span></span><br><span class="line">loss = F.cross_entropy(</span><br><span class="line">    logits.reshape(-<span class="number">1</span>, logits.size(-<span class="number">1</span>)),</span><br><span class="line">    targets.reshape(-<span class="number">1</span>),</span><br><span class="line">    reduction=<span class="string">&#x27;mean&#x27;</span>   <span class="comment"># per-token NLL (nats)</span></span><br><span class="line">)</span><br><span class="line">ppl = torch.exp(loss)  <span class="comment"># if loss is in nats</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;loss(nats)=&#x27;</span>, <span class="built_in">float</span>(loss), <span class="string">&#x27;PPL=&#x27;</span>, <span class="built_in">float</span>(ppl))</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>若使用 bits（$\log_2$）：<code>ppl = 2 ** loss_bits</code>。</p>
+</blockquote>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> Perplexity</li>
+        <li><strong>Author:</strong> Hao Feng</li>
+        <li><strong>Created at
+                :</strong> 2025-09-18 22:14:40</li>
+        
+            <li>
+                <strong>Updated at
+                    :</strong> 2025-09-18 22:24:51
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://matt23-star.github.io/2025/09/blog/
+        </li>
+        <li>
+            <strong>
+                License:
+            </strong>
             
-            <ul class="article-list pl-0 md:pl-8 text-lg leading-[1.5]">
-                
-                    
-                    
-                         <!-- Close the previous LI if not the first item -->
-                        <li class="article-item space-y-2 px-6 pt-10 pb-2 text-xl relative border-l-2 border-border-color" date-is='06-15'>
-                    
-                    <a href="/blog/2025/06/Multimodal_Interpretation/" class="block w-fit">
-                        <span class="article-title my-0.5 text-2xl">Multimodal Interpretation</span>
-                    </a>
-                    
-                
-                </li> <!-- Ensure the last item is properly closed -->
-            </ul>
-        </section>
+
+            
+                This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a>.
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+
+		
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/blog/2025/09/cs336-notes/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">CS336 Notes</span>
+						<span class="post-nav-item">Next posts</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        Comments
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/blog/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://example.example.com',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+                    lang: 'zh-CN',
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
     
 </div>
-</div>
+
+		</div>
+		
+	</div>
+
 	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">On this page</div>
+		<div class="page-title">Perplexity</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%B0%E6%83%91%E5%BA%A6%EF%BC%88Perplexity-PPL%EF%BC%89%E7%BB%88%E6%9E%81%E6%8C%87%E5%8D%97"><span class="nav-text">困惑度（Perplexity, PPL）终极指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%95%B0%E5%AD%A6%E5%AE%9A%E4%B9%89%EF%BC%88Mathematical-Definition"><span class="nav-text">1. 数学定义（Mathematical Definition)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3%EF%BC%88Intuition%EF%BC%89"><span class="nav-text">2. 直观理解（Intuition）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%AE%A1%E7%AE%97%E7%A4%BA%E4%BE%8B"><span class="nav-text">3. 计算示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E4%B8%8E%E7%86%B5-%E7%9B%B8%E5%AF%B9%E7%86%B5%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%88Entropy-KL%EF%BC%89"><span class="nav-text">4. 与熵&#x2F;相对熵的关系（Entropy &amp; KL）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%8E%86%E5%8F%B2%E4%B8%8E%E5%BA%94%E7%94%A8%EF%BC%88History-Usage%EF%BC%89"><span class="nav-text">5. 历史与应用（History &amp; Usage）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E7%8E%B0%E4%BB%A3%E4%BB%B7%E5%80%BC%E4%B8%8E%E5%B1%80%E9%99%90%EF%BC%88Modern-Value-Limitations%EF%BC%89"><span class="nav-text">6. 现代价值与局限（Modern Value &amp; Limitations）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E4%BB%8D%E7%84%B6%E6%9C%89%E7%94%A8%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-text">6.1 仍然有用的场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E5%B8%B8%E8%A7%81%E5%B1%80%E9%99%90%EF%BC%88Pitfalls%EF%BC%89"><span class="nav-text">6.2 常见局限（Pitfalls）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%8F%AF%E6%AF%94%E6%80%A7%E4%B8%8E%E5%8D%95%E4%BD%8D%EF%BC%88Comparability-Units%EF%BC%89"><span class="nav-text">7. 可比性与单位（Comparability &amp; Units）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E2%80%9C%E5%9B%B0%E6%83%91%E5%BA%A6%E6%9C%80%E5%A4%A7%E5%8C%96%E4%B8%BB%E4%B9%89%E2%80%9D%EF%BC%88Perplexity-Maximalist-View%EF%BC%89"><span class="nav-text">8. “困惑度最大化主义”（Perplexity Maximalist View）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E5%90%8C%E7%B2%BE%E7%A5%9E%E5%9F%BA%E5%87%86%EF%BC%88Perplexity-in-spirit-Benchmarks%EF%BC%89"><span class="nav-text">9. 同精神基准（Perplexity-in-spirit Benchmarks）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E5%AE%9E%E6%88%98%E6%B8%85%E5%8D%95%EF%BC%88Practical-Checklist%EF%BC%89"><span class="nav-text">10. 实战清单（Practical Checklist）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E4%BB%A3%E7%A0%81%E9%80%9F%E8%A7%88%EF%BC%88PyTorch-Autoregressive-LM%EF%BC%89"><span class="nav-text">11. 代码速览（PyTorch, Autoregressive LM）</span></a></li></ol></li></ol>
 
-	<div class="page-template-content markdown-body">
-		
-
-		
-	</div>
-
-	<div class="page-template-comments">
-		
 	</div>
 </div>
-
-<div class="paginator">
-	<span class="page-number current">1</span>
+	</div>
+	
 </div>
-  
 			</div>
 
 			
@@ -770,6 +1003,26 @@
 	</div>
 
 	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
 
 	<div class="right-side-tools-container">
 		<div class="side-tools-container">
@@ -847,6 +1100,7 @@
         containers: ["#swup"],
     });
 </script>
+
 
 
 
